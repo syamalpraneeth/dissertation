@@ -1,3 +1,25 @@
+# Custom add
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.cb
+*.cb2
+*.ist
+*.lof
+*.log
+*.lot
+*.out
+*.xml
+*.gz
+*.tdo
+*.pdf
+figpermission/
+figures/
+mwe_changebars/
+preparation_tools/
+ralf/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
