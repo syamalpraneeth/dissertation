@@ -1,0 +1,103 @@
+\subsection{Multiple Cluster Deposition}
+
+\begin{selfcite}
+	\begin{figure}[!ht]
+	\begin{subfigure}{\textwidth}
+		\includegraphics[width=\textwidth,trim={0cm 1.5cm 0cm 4cm},clip]{subs_multi.png}
+	\end{subfigure}%
+	\vfill
+	\begin{subfigure}{\textwidth}
+		\includegraphics[width=\textwidth,trim={0cm 1.8cm 0cm 2.5cm},clip]{subs_multi_xsec.png}
+	\end{subfigure}
+	\mycaption{Substrate thermal model for multiple cluster deposition}{Similar to Figure \ref{f:cibdsmod}, this figure shows the substrate model for the multiple cluster deposition. The substrate is divided into three layers, one more buffer, one as a thermostat to provide temperature to the cluster, an the third fixed layer to provide rigidity. These layers are flat, in comparison to Figure \ref{f:cibdsmod}.}
+	% it does not make sense to have individual spherical layers at each deposition site.}
+	\label{f:cibdmmod}
+	\end{figure}
+
+Following the simulations of deposition of single clusters, the deposition of multiple clusters to form CAMG films was modelled. A large Cu50Zr50 substrate of dimensions 25 nm × 25 nm × 3 nm, consisting of about ∼75,000 atoms was chosen. As described in the previous section, the substrate model is tri-layered with flat substrate layers. Both the buffer and thermostatted-layer are set to an initial temperature of 50 K. As an initial test, single cluster depositions on this larger substrate were also found to relax after 2 ns (see Figure S4a in Supplementary Information). Therefore, each cluster is allowed to relax for 2 ns after deposition before another cluster is deposited next or on top to it. In the CAMG experiment, the clusters are polydisperse in nature, with a Gaussian size distribution, while in the present simulations, however, each cluster is chosen to be of the same size. In addition, each cluster is allowed to rotate by three random Euler angles before deposition to ensure a random configuration in the CAMG film samples. The simulation was performed with periodic boundary conditions in the XY plane. \par
+\end{selfcite}
+
+In the \gls{cibd} experiments, the electric field which finally directs the beam of clusters onto the substrate is swept across the substrate surface to ensure uniform particle coverage. Deposition of multiple clusters at a given time complicates the coding aspects on LAMMPS. To replicate the experimental conditions, however, it was first attempted to sequentially deposit clusters at random locations on the substrate. First, the deposition of a single cluster onto the substrate at 60 meV/atom was studied. As seen in Figure~\ref{f:randalgo}, the simulation was found to converge, when inspecting the average potential energy 2 ns after the deposition. Hence, 2 ns is determined as the wait time between each sequential deposition. Such a simulation of clusters being sequentially deposited turned out to be computationally expensive, costing \sim \textbf{hours} to deposit $\sim$ 50 clusters. Hence, an algorithm was developed to shorten simulation times. It described in the following steps:
+
+\begin{enumerate}
+	\item A neighbourhood of a cluster is defined as the region enclosed within a 2 cluster diameter lengths
+	\item Once a cluster is deposited, its neighbourhood is noted
+	\item If a cluster has not been equilibrated for at least 2 ns, no depositions are allowed in its neighbourhood
+	\item Therfore, f an i+1$^{th}$ cluster is determined to fall in the neighbourhood of any of the $i$ clusters, attempts are made to deposit the i+1$^{th}$ cluster elsewhere
+	\item If no such region exists on the substrate, then the already deposited film is equilibrated for 2 ns, and the i+1$^{th}$ cluster is allowed to land.
+\end{enumerate}
+
+The schematic of the deposition algorithm is illustrated in Figure~\ref{f:randalgo}\textbf{b??}. This method greatly cut down the simulation time as the number of long equilibration steps would be reduced; and this method scales inversely with larger substrates, as the probability of a cluster landing in the neighbourhood of an unequilibrated cluster is greatly reduced.
+
+\begin{figure}[!ht] 
+	\centering
+	\begin{subfigure}{\textwidth} \centering \includegraphics[width=0.7\textwidth]{pe-system_3nm.png}
+	\end{subfigure}%
+	\vfill
+	\begin{subfigure}{0.33\textwidth} \includegraphics[height=0.15\textheight]{grid1} \end{subfigure}%
+%	\hfill
+	\begin{subfigure}{0.33\textwidth} \includegraphics[height=0.15\textheight]{grid2} \end{subfigure}%
+%	\hfill
+	\begin{subfigure}{0.33\textwidth} \includegraphics[height=0.15\textheight]{grid3} \end{subfigure}%
+	\vfill
+	\begin{subfigure}{0.33\textwidth} \includegraphics[height=0.15\textheight]{grid4} \end{subfigure}%
+%	\hfill
+	\begin{subfigure}{0.33\textwidth} \includegraphics[height=0.15\textheight]{grid5} \end{subfigure}%
+%	\hfill
+	\begin{subfigure}{0.33\textwidth} \includegraphics[height=0.15\textheight]{grid6} \end{subfigure}%
+	\vfill
+	\begin{subfigure}{0.33\textwidth} \includegraphics[height=0.15\textheight]{grid7} \end{subfigure}%
+%	\hfill
+	\begin{subfigure}{0.33\textwidth} \includegraphics[height=0.15\textheight]{grid8} \end{subfigure}%
+%	\hfill
+	\begin{subfigure}{0.33\textwidth} \includegraphics[height=0.15\textheight]{grid9} \end{subfigure}%
+	\mycaption{Schematic of Algorithm for random deposition of clusters}{ }
+	\label{f:randalgo}
+\end{figure}
+
+\begin{selfcite}
+This deposition of the clusters on the substrate at random locations in the XY plane, is visualized in Figure~\ref{f:random_multi}b. The random deposition of clusters, resulted in the formation of pillars, thus shadowing certain regions of the film and leading to porous films. The growth of the film bore resemblance to previous statistical studies on ballistic deposition [28]. Although such behavior is very likely to occur in the experiments, here a model was needed to maximize inter-cluster interactions and to reduce the level of porosity. In order to achieve reducing the porosity, the clusters were deposited in a hexagonal close-packed (HCP) arrangement onto the substrate.
+
+\begin{figure}[!ht]
+	\centering
+	\begin{subfigure}{0.50\textwidth} \includegraphics[width=\columnwidth]{pe-system_3nm.png}
+	\subcaption{} \end{subfigure}%
+	\hfill
+	\begin{subfigure}{0.50\textwidth} \includegraphics[width=0.9\textwidth]{film_long}
+	\subcaption{} \end{subfigure}%
+	\label{f:random_multi}
+	\mycaption{Multiple Cluster Deposition with a random deposition algorithm}{Pores etc}
+\end{figure}
+
+Figure~\ref{f:hcpalgo}a shows the schematic of the alogrithm employed to make the HCP depositions. The HCP patterned film is first considered to be made up of one layer of clusters on the XZ plane. This layer is divided into four sublayers as depicted in Figure~\ref{f:hcpalgo}b.: the red and pink clusters of types 1 and 2 each. The alorithm is as follwos:
+
+\begin{enumerate}
+	\item Deposit Red clusters of type 1
+	\item Equilibrate for 2 ns
+	\item Deposit Red clusters of type 2
+	\item Equilibrate for 2 ns
+	\item Repeat steps 1-4 for the Pink clusters
+\end{enumerate}
+
+This sequential deposition of clusters by the order of the sublayer they belong to ensures that the newly deposited clusters are not in the neighbourhood of unequilibrated clusters. The algorithm allows for a nearly parallel deposition, the only latency between each deposition being the time taken for the cluster to reach the surface of the film. On the 24 nm x 24nm XT plane of the substrate, 52 clusters can be arranged in an HCP pattern, meaning that the deposition of the four sublayers can be done with four equilbration steps, instead of a 52 times as would be the case in a completely sequential deposition. This speeds up the deposition compared to single deposition algorithm process by a factor of 13 for the given substrate and cluster combination. Like with the random deposition algorthim, this algorithm also scales better with the increase in XY dimensions of the film. \par
+
+\begin{figure}[!ht] 
+	\centering
+	\begin{subfigure}{0.50\textwidth}
+		\includegraphics[width=\textwidth]{hcp_alg}
+		\subcaption{}
+		\label{fig:hcp_dep_algo}
+	\end{subfigure}%
+	\vfill
+	%\begin{figure}[!ht]
+	\begin{subfigure}{0.48\textwidth}
+		\includegraphics[width=\textwidth]{cibd_hcp}
+		\subcaption{}
+		\label{fig:hcp_top}
+	\end{subfigure}
+	\mycaption{Patterned deposition of multiple clusters}{ (\ref{fig:single_dep_long}) The potential energy of the cluster stablizes with time and converges to its minimum value, the single cluster after deposition was found to relax after 2 million timesteps (2 ns) of equilibration. } %\ref{fig:hcp_dep_algo} HCP patterned deposition. This algorithm (see Figure \ref{fig:hcp_dep_algo}) also allows for parallel deposition, speeding up the deposition compared to single deposition algorithm process by a factor of 13 , and this scales better as the XY dimensions of the film are increased. 
+	%	\ref{fig:hcp_top} Top view of one layer of deposited film atoms in a HCP, pattern colored coded by their height in Z-axis}
+	\label{f:hcpalgo}
+\end{figure}
+\end{selfcite}
+

@@ -1,0 +1,18 @@
+gibbs,$G$,Gibbs free energy
+tm,T$_{m}$,melting temperature
+te,T$_{e}$,mutectic temperature
+tg,T$_{g}$,glass-transition temperature
+fs,$\\mathit{fs}$,femtosecond
+ns,ns,nanosecond
+rc,$R^{max}_{C}$,radius of curvature
+rmsds,RMSD$_{shell}$,root mean square deviation of the shell atoms
+tc,$T_{C}$,Curie temperature
+z,$Z$,coordination number
+ecoh,$E_{coh}$,cohesive energy
+aru,$ar. u.$,area units
+um,$\mu m$,micrometres ($10^{-6}$ metres)
+tk,$T_{k}$,Kauzmann temperature
+vmstr,$\\eta$,von-Mises strain
+nm,$\\mathit{nm}$,nanometers
+tx,$T_{x}$,crystallization temperature
+

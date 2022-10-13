@@ -1,0 +1,110 @@
+\subsection{Local Atomic Packing} \label{s:voro-mgs}
+The local amorphous order of \gls{mg}s, i.e., the description of the coordinations exhibited by the atoms were learnt via Voronoi Tesselation, a process that has been described in Chapter \ref{c:methods}. The reader is suggested to refer to the Section~ \ref{s:voronoi}, wherein the method is described. \par
+
+\begin{selfcite}
+While it is understood that the \gls{ilo} is prominent in binary metallic glasses, the exact occurrence of \gls{ilo} and \gls{fi} is quite sensitive to the simulation protocols and potentials used \cite{Adibi2014,Avchaciov2013, Lu2018, Li2009a}. To standardise the simulation protocols presented in this thesis, Voronoi analysis was performed on these already well studied RQ MGs. \textbf{The coordinates of the final positions of the atoms obtained from the \gls{lmp} based simulations are imported into } \par
+
+\begin{figure}[!ht]
+	\centering
+	\begin{subfigure}{0.45\linewidth} \centering \includegraphics[height=0.4\textheight]{voronoi_Cu50Zr50_MG_asp_All}
+		\subcaption{} \end{subfigure}%
+	\begin{subfigure}{0.45\linewidth} \centering \includegraphics[height=0.4\textheight]{voronoi-sort_Cu50Zr50_MG_asp_All}
+		\subcaption{} \end{subfigure}
+	\mycaption{Local SRO vs. Quench Rate in RQ MGs}{(a) and (b) Show systematic increase in full-icosahedra and icosahedral-like fractions of \cz glasses with decrease in cooling rate, from \qr{10} to \qr{14}.}
+	\label{f:voro_qr}
+\end{figure}
+\end{selfcite}
+
+First, the behaviour of the simulated RQ MGs with varying quench rate, but at a fixed composition (\cz), is verified. Figure~\ref{f:voro_qr}a shows the top seven highest occurring Voronoi indices in \cz RQ glasses quenched with cooling rates \qr{10}, \qr{12}, \qr{13}, and \qr{14}. The percentage of atoms \vi{0}{0}{12}{0} index, representing the full-icosahedral coordinations, is seen to increase with lowering quench rates. Thjs was in agreement with previous works on metallic glasses \textbf{cite}, where it was observed that lowering the glass quench rate correlates with increased icosaheral packign and stabilty. In Figure~\ref{f:voro_qr}b, the sorted categories of Voronoi coordinations are described. While it can be seen that the the Icosahedral like (ICO-like) coordinations also increase with decreasing quench rate, concurrently one can also notice the decrease in the "Other"-or-miscellaneous coordinations, which are known to be indicators of glass instability. (for details on sorting, see Section~\ref{s:voronoi}).  decreasing the quenching rate improves the icosahedral fractions \textbf{cite} \par
+
+Next, the Voronoi behaviour was contrasted with composition at a fixed quecnh rate. cz czsx, and czsix glasses made a quench rate of 12 are studied. From Figure~\ref{f:voro_comp}a-b, two observations can be made: 1. With increasing Cu composition in CuZr metallic glasses while keeping the quench rate fixed, the \gls{fi} anf the ilo increase. This observation is consistent with results from previous works \cite{Peng2010}. 2. At the same time, the defective coordinations marked as "Other" decrease. In CuZr glasses, increase in Cu seems to improve \gls{gfa}.
+
+\begin{selfcite}
+\begin{figure}[!ht]
+	\centering
+	\begin{subfigure}{0.45\linewidth} \centering \includegraphics[height=0.4\textheight]{voronoi_CuZr_MG_asp_All} 
+		\subcaption{} \end{subfigure}%
+	\begin{subfigure}{0.45\linewidth} \centering \includegraphics[height=0.4\textheight]{voronoi-sort_CuZr_MG_asp_All} 
+		\subcaption{} \end{subfigure}%
+	\mycaption{Local SRO vs. Composition in RQ MGs}{(a) and (b) show the increase of \vi{0}{0}{12}{0} full-icosahedral and icosahedral-like fractions with increase in composition from \cz, to Cu$_{60}$Zr$_{40}$ to \czsix for \qr{12} MGs.}
+	\label{f:voro_comp}
+\end{figure}
+\end{selfcite}
+
+\subsection{Potential Energy of MGs}  \label{s:pe-mgs}
+\begin{figure}[!ht]
+	\centering
+	\begin{subfigure}{\linewidth} \centering
+	\includegraphics[width=0.7\linewidth]{pe-atom_CuZr_MG_asp}
+	\subcaption{heading}
+	\end{subfigure}%
+	\vfill
+	\begin{subfigure}{\linewidth} \centering
+	\includegraphics[width=0.7\linewidth]{pe-atom_Cu50Zr50_MG_asp}
+	\subcaption{heading}
+	\end{subfigure}	
+	\mycaption{P.E. vs Composition and Quench Rate in RQ MGs}{Potential Energy per Atom distribution for \qr{12} metallic glasses of varying composition: \cz, Cu$_{60}$Zr$_{40}$ and \czsix. The inset describes the average potential energy (or potential energy per atom) for the three glasses. For each of the glasses, this is the total area under the curve from both Cu and Zr distributions.}
+	\label{f:pe_mgs}
+\end{figure}
+
+The potential energy of the simulated RQ MGs were analysed with respect to both the cooling rate and the compositional changes in CuZr metalliglasses. Figure~\ref{f:pe_mgs} shows the normalized Potential Enegry distributions of the MGs. Two distinct distributions are observed; one for the Cu atoms, and one for the Zr atoms. The Zr atoms are found to occupy lower energies on average compared to the Cu atoms. For the \cz \qr{10} MGs, Cu peak occurs at \sim-3.52 eV and the Zr peak at ~-6.45 eV. In the inset of the figures, the Average potential energy of each atom; i.e, the area under the graph is represented. In Figure~\ref{f:pe_mgs}a, it is noticed that the average P.E. of the RQ MGs reduces with quench rate, this is as expected in literature. The relative peak shifts are not noticeably different from one another; however no further analysis has been attempted to characterize the nature of these distributions. Yet another trend is observed, in Figure~\ref{f:pe_mgs}b, where CuZr RQ MGs of \qr{12} are constrasted with one another: with increasing Cu concentration, the average P.E. notably increases. This change is correspondingly noticed in the P.E./atom distributions: the peak height of Zr drops with composition (and that of Cu increases), owing to the decrease in stoichiometric population of Zr atoms. Furthermore, with the peak centers also being shifted to the right, it is confirmed that both the Cu and Zr atoms, on an average, occupy high energy states in glasses with higher Cu concentration. The relative increase in Cu concentration has a stronger influence in the change of energy states, than does the quench rate. \par
+
+\subsection{Atomic Volume Distributions of MGs}  \label{s:vol-mgs}
+Similar to the Sections~\ref{s:voro-mgs}~and~\ref{s:pe-mgs}, the RQ MGs are also contrasted with each other in terms of atomic volume, while varying both composition and quench rates. In Figure~\ref{f:vol_comp}, the dristributions of atomic volume occupancy is shown; in the inset, the average volume per atom (area under the curve) is described. Like in Figure~\ref{f:pe_mgs}, two separate distributions are once again observed for the Cu and Zr atoms. The Cu atoms are seen to occupy a lower volume on average in comparison to Zr atoms, influenced by their respective atomic radii (Cu: 1.35 \r{A}, Zr: 1.55 \r{A}). With increasing Cu composition, the Cu peak shifts higher, yet it moves to the left. The opposite in observed for Zr atoms. The resulting effect is seen on the average atomic volume: which reduces with increase in Cu composition. CuZr with a higher concentration in the range of compositions explored tend to be better packed. \par
+
+\begin{figure}[!ht]
+	\centering
+	\begin{subfigure}{\linewidth} \centering
+		\includegraphics[width=0.7\linewidth]{pe-atom_CuZr_MG_asp}
+		\subcaption{heading}
+	\end{subfigure}%
+
+	\mycaption{Volume Occupancy vs Composition in RQ \qr{12} MGs}{Potential Energy per Atom distribution for \qr{12} metallic glasses of varying composition: \cz, \czsf and \czsix. The inset describes the average potential energy (or potential energy per atom) for the three glasses. For each of the glasses, this is the total area under the curve from both Cu and Zr distributions.}
+	\label{f:vol_comp}
+\end{figure}
+
+Next, the relationship between volume distributions of \cz glasses and their quench rates were investigated. Figure~\ref{f:vol_quench}a shows the volume distributions of the Cu and Zr atoms. The occurence of the peaks is similar to that inFigure~\ref{f:vol_comp}. In the inset of Figure~\ref{f:vol_quench}a are the calculated values of the average atomic volumes per atom in the RQ MGs. Here, no clear trend is observed. Furthermore, it noticed that the \qr{10} glass has the highest volume, i.e, the lowest density. These findings are in disagreement with previous knowledge. \par
+
+It was initially assumed that the simulation technique mentioned in Section~\ref{s:simtestMG} was a mistake. Firstly, the box sizes chosen were not equal. Next, the melting of the metallic glass was not simulation before the quench. To reveal the influences of these two processing steps, some additional simulations were performed. In Figure~\ref{f:vol_quench}b-d, the volumes were recorded with respect to the temperature, as the quenching process occurred. In the inset, the Temperature (T) is also plotted as a function of time (t). Figure~\ref{f:vol_quench}b MGs were quenched after a 2 ns melt step (same process as in Section~\ref{s:simtestMG}). Figure~\ref{f:vol_quench}c, all RQ MGs had the same number atoms $\sim$ 8000. Next, Figure~\ref{f:vol_quench} all RQ MGs had the same number of atoms, but additionally a 2 ns melting step was performed. The initial random mixture of atoms were first equilibrated at \textbf{300 K}, melted to 2000 K, equlibrated for 2ns, and then quenched. In the three processes, however, the glass behaviour is not reproduced correctly. Moreover, at 50 K, volume fluctuations--significantly higher than a volume change occuring by a temperature increase of 50 K--are seen as indicated in the insets of Figures~\ref{f:vol_quench}b-d. Visually, the glass transition is estimated to be around 600 K, however, a more rigorous estimated has not been attempted for these glasses. \par
+
+\begin{figure}
+	\begin{subfigure}{\linewidth} \centering
+		\includegraphics[width=0.7\linewidth]{pe-atom_Cu50Zr50_MG_asp}
+		\subcaption{heading}
+	\end{subfigure}	%
+	\vfill
+	\begin{subfigure}{0.33\textwidth}
+		\includegraphics[width=0.8\textwidth]{50-50/post/volume_8000}
+		\subcaption{All MGs except 1e10 have $\sim 100K$ atoms}
+	\end{subfigure}%
+	\hfill
+	\begin{subfigure}{0.33\textwidth}
+		\includegraphics[width=0.8\textwidth]{50-50/post_8000/volume_8000}
+		\subcaption{8192 atoms box, quench \textit{without} melting}
+	\end{subfigure}%
+	\hfill
+	\begin{subfigure}{0.33\textwidth}
+		\includegraphics[width=0.8\textwidth]{50-50/post_8000m/volume_8000}
+		\subcaption{8192 atoms box, quench \textit{with} melting}
+	\end{subfigure}
+	\mycaption{Volume Occupancy vs Quench rate in \cz RQ MGs}{text}
+	\label{f:vol_quench}
+\end{figure}
+
+To cross-verify the observations made from Figure~\ref{f:vol_quench}, the volume vs temperature behaviour was also studied as a function of quench rates in \czsix RQ MGs, which is close to the Cu$_{64.5}$Zr$_{36}$ composition validated by the developers of the CuZr glass potential \cite{Mendelev2019}. Starting with a box of $\sim$ 8000 atoms in the box, the glass quenching was performed for atoms equilibrated at an inital temperature of 2000 K (Figure~\ref{f:vol_quench64}a), and also atoms which were first set to \textbf{300 K}, melted to 2000 K, and then quenched to 50 K (Figure~\ref{f:vol_quench64}b). For both treatments, the volume of the RQ MGs presented lots of fluctuations during cooling. For the case of direct quenching from the 2000 K, the expected trend of enchanced packing with lower quench rates is not seen below 75 K. The desired effects were observed when the \czsix RQ MGs were first melted from 300 K to 2000 K before quenching. In both the cases, however, the final average volumes of the glasses fluctuate significanlty in comparison to thermal effects as in Figures Figures~\ref{f:vol_quench}b-d.  \par 
+
+\begin{figure}
+	\begin{subfigure}{0.44\textwidth}
+		\includegraphics[width=0.8\textwidth]{64-36/post_8000/volume_8000}
+		\subcaption{8192 atoms box,\\ quench \textit{without} melting}
+	\end{subfigure}%
+	\hfill
+	\begin{subfigure}{0.44\textwidth}
+		\includegraphics[width=0.8\textwidth]{64-36/post_8000m/volume_8000}
+		\subcaption{8192 atoms box, quench \textit{with} melting}
+	\end{subfigure}
+	\label{f:vol_quench64}
+	\mycaption{Volume Occupancy vs Quench Rate in \czsix RQ MGs}{text}
+\end{figure}
+
+Based on the above simluations, it was inferred that the while the RQ MG volume behaviour is greatly influenced by compositional effects,  the effects of quenching rate are not well reproduced by the EAM potential used. The effects of alternatively available, but older potentials is not in the scope of thesis \cite{Cheng2008,Mendelev2009}.

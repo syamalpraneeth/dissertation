@@ -1,0 +1,256 @@
+%% This is file `DEMO-TUDaThesis.tex' version 2.09 (2020/03/13),
+%% it is part of
+%% TUDa-CI -- Corporate Design for TU Darmstadt
+%% ----------------------------------------------------------------------------
+%%
+%%  Copyright (C) 2018--2020 by Marei Peischl <marei@peitex.de>
+%%
+%% ============================================================================
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3c
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%% http://www.latex-project.org/lppl.txt
+%% and version 1.3c or later is part of all distributions of LaTeX
+%% version 2008/05/04 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%%
+%% The Current Maintainers of this work are
+%%   Marei Peischl <tuda-ci@peitex.de>
+%%   Markus Lazanowski <latex@ce.tu-darmstadt.de>
+%%
+%% The development respository can be found at
+%% https://github.com/tudace/tuda_latex_templates
+%% Please use the issue tracker for feedback!
+%%
+%% ============================================================================
+%%
+% !TeX program = lualatex
+%%
+
+\documentclass[
+english, %draft, 
+twoside,
+open=right,
+ruledheaders=section,%level up to which the headings are separated with lines, see DEMO-TUDaPub
+paper=a5,
+class=report,% base document class. Selects the corresponding KOMA-Script class
+%thesis={type=bachelor},% Thesis document type, for dissertations see the demo file DEMO-TUDaPhd
+thesis={
+% For smaller theses see DEMO-TUDaThesis 
+type=dr, dr=ing, department=matgeo},
+%accentcolor=1c,% blue color selection
+accentcolor=0d,% gray color selection
+%accentcolor=0a,% light gray color selection
+custommargins=geometry,% Margins are automatically calculated using typearea. orignally auto
+marginpar=false,% Header and footer do not extend beyond the margin column
+%BCOR=5mm,%binding correction if necessary
+parskip=half-,%paragraph identification by spacing see KOMA script
+fontsize=9pt,%Base font size according to corporate design is often too small at 9pt
+% logofile=example-image, %If the logo files are not available
+automark, %automatically add chapter and section names
+headline=false %swtich off automark in the header, automark in footer is enabled in lines below
+]{tudapub} 
+
+
+% The following block is only necessary for pdfTeX on versions before April 2018
+\usepackage{iftex}
+\ifPDFTeX
+\usepackage[utf8]{inputenc}%compatibility with TeX versions before April 2018
+\fi
+
+%%%%%%%%%%%%%%%%%%
+%Language Customization & Improved Separation Rules
+%%%%%%%%%%%%%%%%%%
+\usepackage[ngerman, main=english]{babel}
+%\usepackage[main=ngerman, english]{babel}
+\usepackage[autostyle]{csquotes}% quotes simplified
+\usepackage{microtype}
+
+%%%%%%%%%%%%%%%%%%
+%Bibliography
+%%%%%%%%%%%%%%%%%%
+\usepackage[maxcitenames=2,uniquelist=false,backref=true,backend=biber,style=chem-angew,sorting=none]{biblatex} %Bibliography
+%\usepackage[sort,nocompress]{cite}
+\bibliography{library}
+
+%\usepackage{natbib}
+
+%%%%%%%%%%%%%%%%%%
+%Package Suggestion Tables
+%%%%%%%%%%%%%%%%%%
+%\usepackage{array} % Base package for table configuration, autoloaded by the following
+\usepackage{tabularx} % Tables that automatically adjust to the width
+%\usepackage{longtable} % Multipage tables
+%\usepackage{xltabular} % Multi-page tables with adjustable width
+\usepackage{booktabs} % Improved options for table layout using horizontal lines
+
+%%%%%%%%%%%%%%%%%%
+%Package suggestions mathematics
+%%%%%%%%%%%%%%%%%%
+\usepackage{mathtools} % enhanced version of amsmath
+\usepackage{amssymb} % extended character set
+%\usepackage{siunitx} % units
+
+%Formatting for examples in this document. Generally not necessary!
+\let\file\texttt
+\let\code\texttt
+\let\tbs\textbackslash
+
+\usepackage{fontawesome}
+\usepackage{pifont}% Zapf dingbats symbols
+\newcommand*{\FeatureTrue}{\ding{52}}
+\newcommand*{\FeatureFalse}{\ding{56}} 
+
+%%%%%%%%%%%%%%%%%%
+%Added by S. P. Chilakalapudi
+%%%%%%%%%%%%%%%%%%
+
+\DefineBibliographyStrings{english}{%	backref				%https://tex.stackexchange.com/questions/36307/formatting-back-references-in-bibliography
+	backrefpage = {page},% originally "cited on page"
+	backrefpages = {pages},% originally "cited on pages"
+}
+
+\ifLuaTeX
+\let\pdfsavepos\savepos
+\let\pdflastxpos\lastxpos
+\let\pdflastypos\lastypos
+\fi 								% patch the mechanisms which the changebar package is using
+\usepackage[outerbars]{changebar}	% to add vertical bars to selfcite env descr. below
+%\usepackage{changebar}	% to add vertical bars to selfcite env descr. below
+\usepackage{setspace}				%spacingleftmargin=1cm,
+\usepackage{enumitem} 
+\usepackage{amsfonts,xcolor,graphicx}
+%\usepackage{float}
+\usepackage{glossaries}
+\usepackage[automake]{glossaries-extra}
+\glsdisablehyper
+\GlsSetQuote{+}
+
+\usepackage{lmodern}	%for fonts
+\usepackage{todonotes}	%to make to-do list in the document
+\usepackage{rotating}	%rotatable images+captions 
+%\usepackage[bottom]{footmisc}	%push footnote to bottom % CONFLICTS WITH CHANGEBARS
+\usepackage{afterpage}
+\usepackage{xspace}		%save space from being gobbled up after newcommand
+\usepackage{subcaption} %customize subcaptions
+
+\usepackage{hhline}
+\usepackage{multirow}
+
+\usepackage[font=sf, labelfont={sf,bf}, margin=1cm]{caption}
+\usepackage[font=sf, labelfont={sf,bf}, margin=1cm]{subcaption}
+\usepackage{lipsum} %dummy text
+\usepackage{hyperref}
+\usepackage{fontspec}
+\usepackage{titletoc,tocloft} %table of contents modify
+
+%\usepackage{draftwatermark}
+%\SetWatermarkText{VERSION 1}
+%\SetWatermarkScale{5}
+
+\newfontfamily{\tel}[Script=Telugu]{Pothana2000} %Telugu text
+
+\newcommand\myemptypage{
+	\null
+	\thispagestyle{empty}
+	\addtocounter{page}{-1}
+	\newpage
+}
+
+\preto\chapter{\glsresetall}
+\setabbreviationstyle[acronym]{long-short}
+
+\newcommand{\acu}{\r{A}$^{3}$\xspace}
+\newcommand{\cz}{\mbox{Cu$_{50}$Zr$_{50}$}\xspace}
+\newcommand{\czsf}{\mbox{Cu$_{60}$Zr$_{40}$}\xspace}
+\newcommand{\czsix}{\mbox{Cu$_{64}$Zr$_{36}$}\xspace}
+\newcommand{\fs}{\mbox{Fe$_{80}$Sc$_{20}$}\xspace}
+\newcommand{\vi}[4]{\mbox{$<${#1} {#2} {#3} {#4}$>$}\xspace}
+\newcommand{\s}[2]{{#1}$_{#2}$\xspace}
+\newcommand{\qr}[1]{\mbox{$10^{{#1}}$ K/s}\xspace}
+\newcommand{\On}[1]{\mbox{$\mathcal{O}({#1})$}\xspace}
+
+\newcommand\mycaption[2]{\caption[#1]{\textbf{#1}: #2}}
+%
+% unusual hyphenation:
+\hyphenation{nano-structures equi-partition implement-ation nano-crystalline relation-ships agglo-mera-tions hypothe-sized character-ization disser-tation nano-indentation mecha-nisms}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% (self)-citing and fig permissions: borrowed from Ralf Witte%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% helper command:
+\newcommand{\cpr}[2]{\copyright #1, \publisher{#2}}
+% General reprint permissions:
+% usage: \reprinted{bibtex-keys}{year(s)}{publisher}
+\newcommand{\reprinted}[3]{\textsl{Reprinted with permission from} \cite{#1}. \cpr{#2}{#3}}
+% formatted for figures:
+\newcommand{\reprintfig}[3]{ (\reprinted{#1}{#2}{#3})}
+\newcommand{\adapted}[3]{\textsl{Adapted with permission from} \cite{#1}. \cpr{#2}{#3}}
+% formatted for figures:
+\newcommand{\adaptfig}[3]{ (\adapted{#1}{#2}{#3})}
+% declaration:
+% usage: \scdeclaration{bibtex-key(s)}{year(s)}{publisher}
+\newcommand{\scdeclaration}{%
+\begin{quote}
+\textit{Selected sections of this chapter were communicated in \cite{Chilakalapudi2022}. The respective paragraphs---along with further additions and modifications---are indicated by a vertical gray bar in the inner page margin}\footnote{\reprinted{Chilakalapudi2022}{2022}{Elsevier Ltd}.}.
+\end{quote}}
+
+% highlighting of the identical parts using ``changebars''
+%\newenvironment{selfcite}{\cbstart}{\cbend}
+%\setlength\changebarsep{20pt}
+% or alternatively:
+%\newenvironment{selfcite}{\begin{quotation}}{\end{quotation}}
+%\newenvironment{selfcite}{\begin{color}{teal}}{\end{color}}
+
+% publisher, company and product names
+\newcommand{\publisher}[1]{\textsc{#1}}
+\newcommand{\company}[1]{\textsc{#1}}
+\newcommand{\product}[1]{\textsl{#1}}
+\newcommand{\etal}{\textsl{et~al.}}
+
+% add licenses for own papers? For AIP Adv. use \cc \by:	
+\usepackage{cclicenses}
+%\setkomafont{pagefoot}{\sffamily}
+%\lefoot{\thechapter}
+
+%\automark[chapter]{section}
+\lofoot{\leftmark}	%enable automark in footer
+\refoot{\rightmark}
+
+
+\graphicspath{{./figures/}{./figures/misc/}{/home/mj0054/Documents/work/simulations/results/cuzr/CAMG_3nm/}{/home/mj0054/Documents/work/simulations/projects/cibd/cibd_single/1e10/}{/home/mj0054/Documents/work/simulations/projects/clusters/1e10/}{/home/mj0054/Documents/work/simulations/results/cuzr/MSR_compositions/}{/home/mj0054/Documents/work/simulations/results/cuzr/MSR_cooling_rates/}{/home/mj0054/Documents/work/simulations/projects/bulk/msr/}{/home/mj0054/Documents/work/simulations/results/2DLJ/}}
+
+\loadglsentries{glossary}
+\makeglossaries
+%
+\begin{document}
+\include{chapters/title.tex}
+\include{chapters/abstract.tex}
+\include{chapters/tocstuff.tex} %todo list, toc, list of figs and tables, glossary
+
+\setcounter{chapter}{0}
+\mainmatter
+\glsresetall
+\include{chapters/introduction.tex}
+\glsresetall
+\include{chapters/background.tex}
+\glsresetall %\include{chapters/changebar-marks.tex} %changebar testing
+\include{chapters/methods.tex}
+\glsresetall
+\include{chapters/development.tex}
+\glsresetall
+\include{chapters/3nm_CAMG.tex}
+\glsresetall
+\include{chapters/1nm-7nm.tex}
+\glsresetall
+\include{chapters/conclusions.tex}
+
+\appendix
+\addcontentsline{toc}{chapter}{\bibname}
+\printbibliography
+\include{chapters/supplementary.tex}
+\include{chapters/cv.tex}
+
+\addcontentsline{toc}{chapter}{Acknowledgements} \todo{Add the Acknowledgements chapter}
+%\include{chapters/ack.tex}
+\end{document}

@@ -1,0 +1,46 @@
+\section{Local Structure Tailoring in CAMGs}
+\begin{changebar}
+To obtain a more detailed insight into the structure of CAMGs, in particular the interfacial regions, the normalized \gls{prdf} of the CAMGs, NG, and the MGs were studied (see Figure~\ref{f:camg-rdf} in \nameref{c:supple} for more details). Like in Section~\ref{s:simtestMG}, the Cu-Cu (2.45 \r{A}), Cu-Zr (2.8 \r{A}), and Zr-Zr (3.25 \r{A}) first peak positions of the MGs match well with those previously reported values \cite{Nasu2007,Duan2005}. Even the NG and CAMGs follow the same pair distributions as those of MG. Moreover, no significant change in atomic pair correlations both in the core and the interfacial regions are observed. This prompts the study of the local \gls{sro}. \par
+
+The local atomic environment is typically represented using the Voronoi analysis method, and the polyhedra are represented by a  \vi{n$_{3}$}{n$_{4}$}{n$_{5}$}{n$_{6}$} Scha\"afli index (See Section~\ref{s:voronoi}). Figures~\ref{f:voro_camg}a-c show the top seven frequent Voronoi polyhedra (arranged in the numerical order of the indices) for CAMGs, NGs, \gls{mght}, and the precursor MG quenched at a rate of \qr{10}. In Figure~\ref{f:voro_camg}a, the histograms of the Voronoi polyhedra for all the atoms constituting the entire six sample sets are shown, whereas Figures~\ref{f:voro_camg}b-c denote the histograms for the core and interface atoms, respectively. The index \vi{0}{0}{12}{0}, which represents the FI coordination, is the highest occurring in the MG, amongst all the six glasses. For the \qr{10} MG, the heat-treatment reduces the FI order as seen in \gls{mght}. The next highest occurring index is the \vi{0}{2}{8}{2}, which is known to be an \gls{ilike} polyhedron \cite{Yue2018,Borodin1999}. Its occurrence is highest in MG and \gls{mght} when compared to the NG and CAMGs. As mentioned in Section~\ref{s:voronoi}, the Voronoi polyhedra are known to be classified into four main categories \cite{Yue2018} are repeated here for the benefit of the reader: 1. icosahedral-like: \vi{0}{0}{12}{0}, \vi{0}{0}{10}{x}, and \vi{0}{2}{8}{x}; 2. crystal-like: \vi{0}{4}{4}{x} and \vi{0}{5}{2}{x}; 3. mixed coordinations: \vi{0}{3}{6}{x}, where 0 $\leq$ x $\leq$ 4; and 4. other remaining indices. With this knowledge, it is noticed that in the NG and CAMGs the other prominently occurring polyhedra in Figure~\ref{f:voro_camg}a-c are of the icosahedral-like and mixed coordination types. \par
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=\textwidth,trim={1cm 0cm 1cm 0cm},clip]{2021_05/figures/6.pdf}
+	\mycaption{SRO recovers in CAMGs with deposition energy:}{The top 7 Voronoi indices arranged based 		on numerical order, without considering any special central atom species (Cu/Zr) in the Voronoi Polyhedra. The Voronoi histograms are shown for (a) the entire representative sample, (b) the core atoms, and (c) the interface atoms, respectively. The magenta and yellow backgrounds in the figures are rendered to represent the core and interface cases, respectively. Figure~\ref{f:voro_camg} (d), (e) and (f) show the indices sorted into known groups of coordinations. Crystalline coordinations are absent in all of the simulated glasses, in particular in the \gls{mght}, NG, and CAMGs where a heat-treatment is involved in the simulation process. The FI and ILO short-range order (SRO) in CAMGs increase systematically with deposition energy}
+	\label{f:voro_camg}
+\end{figure}
+
+Furthermore, the Voronoi indices are sorted based on the above rules for the six simulated glass samples and represented in Figure~\ref{f:voro_camg}d-f, in order to facilitate the analysis of the dominant indices in comparison of the different metallic glass structures. It is first noticed that crystalline coordinations do not occur in any of the simulated metallic glass samples, especially in the \gls{mght} and the CAMGs, despite the heat treatment involved in their processing. Especially, the lack of any crystalline coordinations confirms that all the simulated CAMGs are fully amorphous, both in the cores and in the interfaces. \par
+
+In the CAMGs and NGs a significantly reduced short-range FI order was observed, consistent with previous studies of NGs \cite{Adjaoud2019}. This trend is also seen in the analysis of the ILO. The present simulations of the \gls{rq} \cz MGs have shown that less stable MGs (prepared at higher quench rates) are accompanied by a reduction in FI fractions and also in the ILO (refer to Figure~\ref{f:voro_qr} in Section~\ref{s:voro-mgs}). The tendency of a decrease of stability in bottom-up metallic glasses (NGs, CAMGs) with decreasing ILO is further discussed in Section~\ref{s:camg-pe}. \par
+\end{changebar}
+
+The sorted Voronoi polyhedra histograms for Cu-centered and Zr-centered coordinations are depicted in Figure~\ref{f:vorosort-cu-zr} (The unsorted Voronoi Indices distribution is indicated in Figure~\ref{f:voro_cu-zr} in \nameref{c:supple}). The ILO is observed to be higher for Cu atoms than for Zr atoms for all the six metallic glass samples that have been studied. The Cu-centered atoms make up the majority in contributing to \gls{ilo}. Also seen is the increasing icosahedral-like order in Cu-centered atoms in the CAMGs with deposition energy. \par
+
+\begin{figure}[!ht]
+	\centering
+	\begin{subfigure}{0.45\linewidth} \centering \includegraphics[width=\textwidth]{1e10/voronoi-sort_3nm_Cu50Zr50_CAMG_vs_MG_1e10_asp_Cu} 
+		\subcaption{} \end{subfigure}%
+	\hspace{1cm}
+	\begin{subfigure}{0.45\linewidth} \centering \includegraphics[width=\textwidth]{1e10/voronoi-sort_3nm_Cu50Zr50_CAMG_vs_MG_1e10_asp_Zr}
+		\subcaption{} \end{subfigure}
+	\mycaption{Sorted Voronoi Polyhedra for Cu- and Zr- centered atoms in MGs vs in \gls{cbmg}s}{The atomic fractions here are defined w.r.t the same species i.e., at. fraction of Cu is the fraction of Cu atoms exhibiting a certain local order. }
+	\label{f:vorosort_cu-zr}
+\end{figure}
+
+\todo[inline]{Want to add sorted voronoi core and interface, cu and zr centered in the appendix? decide}
+
+\begin{changebar}
+Looking back at Figure~\ref{f:voro_camg}e-f, it is observed that for NGs and CAMGs, both FI order and the ILO indices are respectively at least 1\% and 5\% higher in the interfaces compared to the cores. It is evident that the interfaces, being richer in Cu compared to the core regions, exhibit higher FI as well as higher ILO. This indicates that the interfaces must be better packed than the core regions. \par
+
+Interestingly, a systematic increase in FI order (See Figure~\ref{f:voro_camg}c) in the CAMGs with increasing impact energy is observed. This trend, also seen in the ILO fractions of the entire sample, is especially prominent for the interfaces (see Figure~\ref{f:voro_camg}f). It should be noted that the interfaces for all impact energies have the same chemical composition. The increase in the FI-order and ILO in the interfaces can then be interpreted to be the direct result of the CIBD process. In both the core and interface atoms, another striking feature is the systematic increase of ILO in the CAMGs with increasing deposition energy, recovering towards the ILO of MG and \gls{mght}. The present model demonstrates the possibility of tailoring the local amorphous order with impact energy for metallic glasses synthesized via the CIBD route.
+
+\end{changebar}
+%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%
+
+
+

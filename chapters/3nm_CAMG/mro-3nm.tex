@@ -1,0 +1,39 @@
+\section{Medium-range order in CAMGs}
+
+\begin{selfcite}
+The relative packing of coordination polyhedra centered around solute atoms is used to define MRO in metallic glasses; it has been shown that the solute atoms exhibit string-like connectivity when the solute concentration goes beyond 20-30 at.\%, \cite{Sheng2006}. Similarly, the string-like connectivity of FI-atoms, which are the atoms residing in FI coordinations, have been reported to indicate MRO, as icosahedral \vi{0}{0}{12}{0} clusters have a strong tendency to aggregate with each other \cite{Bernal1959,Miracle2004,Li2008}. Interpenetrating string-like networks of atoms in FI environments have been reported before as indicative of MRO, including the study by Lee et al. \cite{Lee2011} and by Ritter et al. [\cite{Ritter2011}. To visualize these strings for the glasses simulated in this work, bonds were constructed  using \gls{ovito} for FI-atoms with other FI-atoms, present within a cut-off radius of 3.5 \r{A}. \par 
+\end{selfcite}
+
+Figure~\ref{f:mro-alt_camg}a shows one of the FI-atom chains found in one of the CAMGs. The yellow coloured atoms are the ones in the FI environment, the blue atoms are the surrounding atoms in the coordination polyhedron. In Figure~\ref{f:mro-alt_camg}b, the number of strings (\% of total strings) below a maximum string length are described for for all FI-atoms (Figure~\ref{f:mro-alt_camg}b1), FI-atoms in the cores (Figure~\ref{f:mro-alt_camg}b2) and FI-atoms in the interfaces (Figure~\ref{f:mro-alt_camg}b3) for the \gls{ng}s and \gls{camg}s. The number of small strings of sizes 3-9 recover in the CAMGs, specifically in the interfaces towards MG and \gls{mght} values with increasing deposition energies. In the glasses, at least 74\% of all linked atoms are in 3-atom or longer string-like networks. This behaviour is seen in both the cores and the interfaces of the \gls{camg}s and \gls{ng}s as well. The \gls{mro} in all the glasses in the context of the larger strings of length 40-100 is similar. \par
+
+\begin{figure} %[!ht]
+	\centering
+	\begin{subfigure}[b]{0.5\textwidth} \centering
+	\includegraphics[width=\textwidth]{mrochain2}	\subcaption{}
+	\end{subfigure}%
+	\vfill
+	\begin{subfigure}{\textwidth} \centering
+		\includegraphics[width=\textwidth,trim={0cm 1cm 0cm 1cm},clip]{2021_05/figures/12.pdf}	\subcaption{}
+	\end{subfigure}%
+	\mycaption{MRO in MG, \gls{mght}, NG and CAMGs}{}
+	\label{f:mro-alt_camg}
+\end{figure}
+
+\begin{selfcite}
+Figure~\ref{f:mro_camg}a shows the fraction of FI-atoms in each of the glasses made from a \qr{10} MG, which are present in a string of a given size. From both Figures~\ref{f:mro-alt_camg}b~and~\ref{f:mro_camg}a, it is evident that most FI-atoms exist in small strings. However, the number of atoms in small strings (3-5 FI-atoms in size) is the lowest in the MG and \gls{mght}. A higher percentage of larger-sized strings is seen in the MG, \gls{mght} and NG. This can be attributed to the geometry of the samples: larger strings can form in MG, \gls{mght}, and NG cases due to periodic boundaries conditions in all directions, and the simulation box being completely filled. Such strings of larger sizes cannot be expected to form in the CAMGs, as the sample considered for analysis without surface artifacts is limited by the dimensions of the representative slabs from within the CAMG films. However, amongst the 3 CAMGs, it can still be noted that a 600 meV/atom CAMG has more 3 FI-atom strings than the 60 meV/atom CAMG. This trend is seen for strings of at least 5 FI-atoms in length. \par
+
+Figure~\ref{f:mro_camg}b shows the average string size for all simulated glasses. The average string size in NG and CAMGs is about 40\% lower than for MG and \gls{mght}. However, with increasing deposition energy, a slight increase in average string size in the CAMGs deposited at 60 and 300 meV/atom compared to the 60 meV/atom CAMG is observed. This indicates that with increasing deposition energies in the CAMGs, the MRO of the strings of FI-atoms can be at least partially recovered. A comparison of the present results with the available experimental data including the structural and magnetic information on \fs CAMGs is not possible as the current simulations are specific to the \cz metallic glass, and also due to the non-availability of an EAM potential for \fs systems. However, some conclusions on the behavior of cluster-assembled glasses, in particular on the of the medium-range order in CAMGs, can help to better understand the experimental results for \fs CAMGs, in particular the comparison to the local motif analysis reported in \cite{Benel2019}. As the local order in CAMGs recovers towards the metallic glass values with increasing impact energies, an increase in the size of the string-like MRO networks is expected. This behavior could explain the strengthening of exchange interactions, and thus the observed increase in the ferromagnetic transition temperature (Curie temperature) with increasing impact energy. \par
+
+\begin{figure}%[!ht]
+	\centering
+	\includegraphics[width=\textwidth,trim={2cm 0cm 2cm 0cm},clip]{2021_05/figures/9.pdf}
+	\includegraphics[width=\textwidth,trim={2cm 0cm 2cm 0cm},clip]{2021_05/figures/10.pdf}
+	\mycaption{MRO in 3 nm CAMGs and NGs}{}
+	\label{f:mro_camg}
+\end{figure}
+%\end{selfcite}
+
+%\begin{selfcite}
+Next, in Section~\ref{c:camg_quenchrt}, an attempt is made to explain the dependence of the final metastable states of the NG and CAMGs on the initial processing conditions of the clusters themselves. This could help to understand the CIBD process and would allow to traverse the \gls{pel} of metallic glasses. One important processing condition in the simulation is the quenching rate of the MG from which the clusters are formed. Therefore, a comparison of CAMGs and NGs, prepared with different quenching rates is made. \par
+\end{selfcite}
+

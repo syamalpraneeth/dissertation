@@ -1,0 +1,33 @@
+\subsection{Single Cluster Deposition}
+\begin{selfcite}
+With the cluster prepared, the next course of study towards understanding \gls{camg}s is the simulation of deposition of single clusters on a surface, as depicted in Figure~\ref{f:cibdsmod}a. These simulation conditions were performed to represent closely the experimental conditions in the cluster ion beam deposition (CIBD) experiments, in terms of cluster size and range of impact energies [10,11]. In the CIBD experiments, CuZr clusters are generated as charged cluster-ions and then guided as a particle-beam towards the substrate using an electric field. The strength of the said electric field determines the impact energy of the cluster ions onto the substrate.  In the present simulation, a classical momentum was given to the cluster to mimic the cluster-acceleration in the experiments, when they pass through the electric field. Furthermore, in the experimental CIBD set-up, the substrate is electrically grounded to prevent any charge buildup on the surface [24]. Therefore, the deposition process can be modelled with classical molecular dynamics without taking electrodynamics into account. \par
+
+\begin{figure}[!ht] \centering
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics[width=\textwidth,trim={0 0 4cm 0.5cm},clip]{cibd.png}
+		\caption{}
+		\label{fig:single}
+	\end{subfigure}%
+	%	\hfill
+	\hspace{1cm}
+	%	\hspace{-4cm}
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics[width=\textwidth,trim={4cm 0 0 0.5cm},clip]{cibd-xsec-slice.png}
+		\caption{}
+		\label{f:single_xsec}
+	\end{subfigure}
+	\mycaption{Substrate model for deposition of 3 nm cluster}{The cluster is deposited onto a substrate, with a given energy as shown in \ref{fig:single}. The cross-sectional view of the film is as in \ref{f:single_xsec}, with a mixing/buffer layer and thermostatted layer. The third fixed layer gives rigidity to the substrate.}
+	\label{f:cibdsmod}
+\end{figure}
+
+In terms of the thermodynamics, the cluster is modelled as a closed system (micro-canonical ensemble). A simplification, which was made in the MD simulations, is the replacement of the oxidized Si-substrate used in the experiments [10,11] with an amorphous \cz substrate, equilibrated for 2 ns. The crossection of Figure~\ref{f:cibdsmod}a, illustrated in Figure~\ref{f:cibdsmod}b shows a layered thermal model with the following configuration used to represent the substrate: 1. the top layer (modelled as a micro-canonical ensemble) serving as a buffer between the clusters and the substrate, 2. the middle layer being coupled with a heat sink, using a Nosé-Hoover Thermostat to hold the substrate temperature at 50 K, and 3. the bottom layer, with atoms held fixed to mimic the rigidity of the substrate. The buffer and thermostatted layers had a minimum thickness of two-atom layers. It is important to note that all three layers are essential to model the substrate. Without the first layer, the deposited atoms would immediately quench onto the substrate. The second layer accounts for temperature control, the lack of which would have led to a thermally unstable (explosive) substrate caused by its inability to expel sufficient amounts of energy from the system. Furthermore, without the third layer, the substrate would have no mechanical rigidity, and the clusters will simply pass through the substrate at higher energies. The layer model was configured in accordance with previous MD thin film studies [25-27]. For the case of the single cluster depositions, a semi-hemispherical layout was utilized for the thermostatted layer to account for a spherical shockwave that passes through the substrate. For these single cluster depositions, the substrate length and width were chosen to be 6 nm: two times as wide as the cluster diameter. \par
+
+\begin{figure}
+	\includegraphics[width=0.5\linewidth]{3nm/post/clus_asph.png}
+	\mycaption{Convergence of cluster deposition convergence}{}
+	\label{f:cibdsasph}
+\end{figure}%
+
+The thickness of the first two layers (buffer and thermostatted layers) can affect the heat absorption and also the hardness of the substrate. Consequently, the dissipation of the energy introduced to the film-substrate system by the cluster deposition is influenced by the specific design of the layers. For the present substrate model, the deposition of a single cluster was inspected at large timescales. Figure~\ref{f:cibdsasph} shows the evolution of asphericity of the single cluster upon deposition. The asphericity of the cluster is defined as the ratio of the radii of the cluster in the deposition direction ($R_{Z}$ in Z-axis) to that the deposition plane ($R_{XY}$ in the XY plane). The undeposited cluster, which is spherical, intially has a $R_{Z}/R_{XY}$ =1, and as the cluster deforms monotonically with the impact energy, the $R_{Z}/R_{XY}$ decreases further. After deposition, the $R_{Z}/R_{XY}$ demonstrates a dip, and eventually the simulation converges, as seen at even 2 ns after the cluster deposition. \par
+\end{selfcite}
+

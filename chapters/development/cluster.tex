@@ -1,0 +1,48 @@
+\section{Cluster Synthesis}
+
+\begin{selfcite}
+In the present work, the structure of CAMGs with a specific size of the clusters as a function of impact energy is studied using MD simulations. The structure of CAMGs will be compared to MGs prepared by RQ. The CAMGs structure will also be compared to NGs prepared by compaction process using the same original clusters as for the simulation of the CAMGs. \par
+\end{selfcite}
+
+The clusters generated in the CIBD experiments \cite{Benel2018,Benel2019} were generated via \gls{igc} (see Section \ref{c:theory} for more details). This was simulated earlier for a Kob-Anderson model to simulate "PVD-Nanoglasses" \cite{Danilov2016}. For a more expensive simulation such as with the EAM, the procedure was to be optimized. Pressure, i.e., growth rate of gases, algorithm to periodically delete straying atoms, didn't work. Furthermore, when adding in new atoms, their chemical potential effects would affect the thermodynamics of this otherwise closed system. This complicated matters. Additional modelling and testing of the \gls{igc} simulation proved to be detrimental to the timeline of the thesis. As a workaround, it was chosen to pursue the alternative method of deriving clusters from the bulk of a simulated RQ MG. \par
+
+\begin{selfcite}
+Consequently, in a first step, a free-standing cluster was prepared by cutting a sphere of 3 nm diameter (with ~800 atoms) from a \qr{10} \cz-MG held at 50 K temperature. As reported earlier by Adjaoud and Albe \cite{Adjaoud2016}, any cluster develops surface stresses immediately after cutting. The slow kinetics at 50 K prevent the atoms from relaxing to their lowest energetic state. Therefore, a short-time increase of the temperature of the cluster, which increases the mobility of the atoms, allows to obtain a configuration similar to a cluster synthesized in a real experiment by \gls{igc}. Thus, the protocol developed in reference \cite{Adjaoud2016}, viz., heating the cluster shortly to 1000 K, i.e., beyond the glass-transition temperature \gls{tg}, followed by cooling it back to 50 K, was employed. Both the heating and cooling was performed at a rate of 2.5×\qr{12}. Although \gls{tg} is crossed in the simulation, crystallization is avoided (see Section 3.5) due to the short heating time, but sufficient diffusion occurs over the short distances to establish the equilibrium concentration profile in the cluster. In addition, the cluster was equilibrated for 2 ns both after the cutting and after the heat treatment. The heat treatment and its effect on the structure of the cluster is visualized in Figures \ref{f:clus_rad-3nm} and \ref{f:clus_comp-3nm} for a cluster derived from the \qr{10} MG. \par
+\end{selfcite}
+
+It was reported in earlier experiments of small CuZr clusters, of 20-30 atoms in size, that the Cu atoms segregated to the surface \cite{Kartouzian2014}. This chemical segregation, also observed in granular matter and dubbed the "Brazil-nut" effect, influences the local chemical homogeneity in the length scales comparable to the 3 nm cluster in the simulations. To verify the nature of the chemical segregation, the Cu and Zr compositions in 0.2 nm thick bands at various radii within the simluated spherical cluster were plotted as a function of the said radii in Figure~\ref{f:clus_rad-3nm}a. The inverse of the square root of the total population $1/\sqrt{N_{band}}$ is also depicted to estimate the error. At lower radii ($\leq$ 8 \r{A}) the population in the band is low, and the error is high. In the intermediate radii ranges of 8 \r{A}$\leq r \geq$ 13 \r{A}, the Cu and Zr compositions fluctuate around 50 at. \%. From 13-15 \r{A}, Cu and Zr compositions are seen to increase and decrease with increasing $r$. This is indicative of the Cu segregation. Beyond 15 \r{A}, the bands extend outside the volume of the shell, capture only a few of the outer atoms of the cluster, which happen to be predominantly Cu as well. For this reason, the error estimate $1/\sqrt{N_{band}}$ increases for $r \geq $ 15 \r{A}. This behaviour seen in Figure~\ref{f:clus_rad-3nm}a was also replicated in Figure~\ref{f:clus_rad-3nm}b, where the bands were chosen to be equipopulated with \textbf{100} atoms, instead of having the same thickness. In this case, the error estimate remains constant. Nevertheless, the presence of a chemical segregation is observed.  \par
+
+\begin{figure}[!ht]
+	\centering
+	\begin{subfigure}{0.5\textwidth} 	\centering
+		\includegraphics[width=\textwidth]{3nm/50-50/post/comp_3nm}
+		\label{fig:radial_3nm}
+	\end{subfigure}%
+	\vfill
+	\begin{subfigure}{0.5\columnwidth} 	\centering
+		\includegraphics[width=\textwidth]{3nm/50-50/post/comp_3nm (copy)}
+		\label{fig:radial_3nm_alt}
+	\end{subfigure}%
+	\mycaption{3nm \cz  cluster chemical substructure}{ }
+	\label{f:clus_rad-3nm}
+\end{figure}
+
+\begin{selfcite}
+In Figure~\ref{f:clus_comp-3nm} the evolution of the Cu composition in the 0.2 nm thick shell at a radius of 1.3 nm is shown. Up to a time t = 2 ns, when the cluster is equilibrated at 50 K, the Cu composition remains constant. The heating and cooling spike of the cluster between t = 2 ns and t = ∼3 ns results in a sharp increase of the Cu-concentration in the outer shell compared to the bulk composition, eventually leveling off at about 56 at. \%. In the remaining core volume, the Cu concentration decreases to 44 at. \%. While the overall composition of the 3 nm cluster remains unchanged, two distinct regions are seen in the equilibrated cluster–a core region with a lower Cu concentration, and a shell region with a substantially higher Cu concentration. The inset in Figure \ref{f:clus_comp-3nm}a depicts the core (colored magenta) and shell (colored yellow) regions of the cluster. As in other reports, Cu-atoms segregate towards the cluster surface—increasing the Cu concentration by 9 at. \% as compared to the initial homogeneous composition, while the Zr-atoms are enriched in the core. This compositional variation on the length scale of the cluster size is carried over to the interfacial regions between clusters upon compaction or energetic impact. From previous studies it is known that such chemical heterogeneities in compacted NGs on the nanometer length scale stabilize the amorphous structure \cite{Adjaoud2016}. \par
+
+\begin{figure}[!ht]
+	\begin{subfigure}{0.5\columnwidth} 	\centering
+		\includegraphics[width=\textwidth]{3nm/50-50/post/comp-cu_3nm.png}
+		\label{fig:clus_cu_diff}
+	\end{subfigure}% 
+	\hfill
+	\begin{subfigure}{0.5\columnwidth} 	\centering
+		\includegraphics[width=\textwidth]{3nm/50-50/post/comp-zr_3nm.png}
+		\label{fig:clus_zr_diff}
+	\end{subfigure}% 
+	\mycaption{3nm \cz  cluster core-shell composition evolution}{ %(a) shows the radial variation of composition in the 3nm cluster and the clear presence of a shell region from 14 \r{A} radius. 
+		Copper atoms diffusing out of a 13 \r{A} shell (the core-shell structure is depicted in the inset) of 2\r{A} thickness. The Cu composition decreases in the core and correspondingly increases in the shell, as the cluster is heated up to and beyond $T_{g}$.}
+	%In (d), we see the average potential energy per atom increases near the surface of the cluster.}
+	\label{f:clus_comp-3nm}
+\end{figure}
+\end{selfcite}

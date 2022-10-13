@@ -1,0 +1,358 @@
+\chapter{Development of Simulations of Cluster-based Metallic Glasses} \label{c:dev}
+\scdeclaration
+
+It has been discussed in Chapter \ref{c:intro}, that a simulation study of the \gls{camg} is critical in understanding their local structure and related properties. %\gls{rq} \gls{mg} in general are traditionally modelled using the \gls{eam} potential and the \gls{md} approach (see Section \ref{c:methods}).
+The present chapter elucidates the \gls{md} models developed within the framework of this thesis to produce simulated data sets of \gls{camg}s. \par
+
+First, the \Gls{rq} \gls{mg} is simulated and characterized, to test the \gls{eam} potential, and to serve as a reference. The protocols are then extended to study the \gls{camg} and \gls{ng}. \par First, the simulation of amorphous clusters---the building blocks of the \gls{camg}s---are discussed. The reader will then be introduced to novel simulation protocols, developed to investigate the \gls{camg}s. Further, a simulation protocol for \gls{ng}s is also discussed.  The challenges encountered in modelling the non-trivial deposition process of the \gls{camg}, and solutions on how to overcome these hurdles are presented; thereby allowing one to simulate \gls{camg}s efficiently with parallel computing. %by their \gls{rdf}s, local atomic (\gls{vp}) structure, and their atomic volume and \gls{pe} occupancies. \par
+
+\section{Simulating Metallic Glasses} \label{s:simtestMG}
+The simulated behaviour of Cu-Zr \gls{rq} \gls{mg}s are compared with results from previously known works. The variation of the local packing, final energy states, and volume occupancy in the Cu-Zr glasses are studied as a function of quench rates (\qr{10}, \qr{12}, \qr{13}, \qr{14}) and composition (\cz, \czsix, \czsf). \par
+
+\begin{sidewaysfigure} %[!h]
+	\centering
+	\begin{subfigure}{\textheight} \centering \includegraphics[width=\textheight]{rdf_CuZr_MG_asp_All.png}
+		\subcaption{PRDFs vs Compositions: \cz, \czsf, and \czsix.} \end{subfigure}%
+	\vfill
+	\begin{subfigure}{\textheight} \centering \includegraphics[width=\textheight]{rdf_Cu50Zr50_MG_asp_All.png}
+		\subcaption{PRDFs vs Quench Rates: \qr{10}, \qr{12}, \qr{13} and \qr{14}} \end{subfigure}
+	\mycaption{Partial Pair Correlations in RQ MGs}{Cu-Cu, Cu-Zr, and Zr-Zr pair correlations in the RQ MGs (See Section~\ref{s:rdf-mgs} for details).}
+	\label{f:rdf_mgs}
+\end{sidewaysfigure}
+
+\begin{changebar}
+%\cbstart
+Atomistic \gls{md} simulations of binary Cu-Zr glasses have been performed using the \gls{lmp} code \cite{Plimpton1995,Thompson2022}.
+%%\cbend 
+%\newpage
+%\cbstart
+A semi-empirical potential developed with data from Cu$ _{46}$Zr$ _{54} $ alloys \cite{Mendelev2019}, based on the \gls{eam} model proposed by \textcite{Daw1993}, was used to model the Cu-Zr interactions. The \cz  \gls{mg}s were simulated by quenching from the 2000 K (liquid state) to 50 K temperature. The liquid state was simulated by equilibrating an equimolar mixture of Cu and Zr atoms placed at random coordinates at 2000 K for 2 ns. The quenching to the glassy state was performed at zero pressure at three cooling rates of \qr{10}, \qr{12}, \qr{13} and \qr{14}. The system temperature and pressure were controlled by using a Nos\'e-Hoover thermostat (NPT in \gls{lmp}). The MGs will be referred to by the quench rate: for instance, an MG quenched at \qr{10} will be referred to as a \qr{10} MG, and so on. For the case of the \qr{10} \gls{mg}, which requires a much longer and computationally expensive simulation, a sample of $\sim$16,000 atoms was chosen, and replicated in all three dimensions, resulting in a larger sample of $\sim$150,000 atoms in total. For the \qr{12} and \qr{14} MGs, in which the simulation costs are less, the larger samples of $\sim$150,000 atoms were prepared directly. Periodic boundary conditions were used in all three directions, and a time step of 1 \gls{fs} was chosen for all simulations. After quenching, the metallic glasses were equilibrated for 2 ns at 50 K. \par
+%\cbend
+\end{changebar}
+
+\subsection{Pair-correlations in RQ MGs} \label{s:rdf-mgs}
+The \gls{prdf} were computed from the snapshots of the \gls{rq} \gls{mg}s, with a cutoff radius of 10 \r{A}. The lack of any sharp peaks indicate lack of crystalline order. The first peak positions of Cu-Cu (2.45 \r{A}), Cu-Zr (2.8 \r{A}), and Zr-Zr (3.25 \r{A}) in the MGs match well with those previously reported values \cite{Duan2005,Nasu2007}. Beyond this information, the PRDFs fail to capture the change in the structure of RQ MGs with cooling rate or with composition. \par
+
+%\input{chapters/development/MGs.tex}
+\subsection{Local Atomic Short-range Order} \label{s:voro-mgs}
+The local amorphous \gls{sro} of \gls{mg}s, i.e., the description of the local coordinations exhibited by the atoms were studied via Voronoi tesselation, a process that has been described in Chapter~\ref{c:methods},  Section~\ref{s:voronoi}. % The reader is suggested to refer to the Section~\ref{s:voronoi}, wherein the method is detailed.
+The volumes occupied by atoms upon Voronoi tesselation were shown by \textcite{Sheng2006} to be analogs of the Frank-Casper polyhedra \cite{Frank1958}. These shapes were used to define the local \gls{sro}. Moreover, it was observed that certain polyhedra were more prominently occurring. In CuZr glasses, atoms in icoshedral coordinations---or demonstrating \gls{fi} order---and \gls{ilike} coordinations---or demonstrating \gls{ilo}---were found to be the highest occuring polyhedra, and the most relevant motifs that correlate to glass stability \cite{Ding2014,Yue2018}. Other kinds of polyhedra could also possibly exist in the glasses, describing other motifs, such as crystalline packing (should crystallinity be present in the solids), or the liquid-like packing (which constitute sites for shearing under stresses) \cite{Ding2014,Cheng2009}. However, these polyhedra are not discussed in detail in this thesis. \par
+
+\textcite{Ding2014} mention how the distinction between \gls{fi} and \gls{ilike} lies in the distortion tolerance set in the polyhedron designation algorithm during the tesselation. For this reason, the quantified \gls{fi} is quite sensitive for differences in the simulation protocols and potentials used.\cite{Adibi2014,Avchaciov2013, Lu2018, Li2009a}. This variability also prompts the inclusion of the \gls{ilo} in the study of the local amorphous \gls{sro}. To standardise the simulation protocols presented in this thesis, Voronoi analysis was performed on these already well studied RQ MGs. \par
+
+\begin{changebar}
+\begin{figure}[h] %[!h]
+	\centering
+	\begin{subfigure}{0.45\linewidth} \centering \includegraphics[height=0.4\textheight]{voronoi_Cu50Zr50_MG_asp_All}
+		\subcaption{} \end{subfigure}%
+	\begin{subfigure}{0.45\linewidth} \centering \includegraphics[height=0.4\textheight]{voronoi-sort_Cu50Zr50_MG_asp_All}
+		\subcaption{} \end{subfigure}
+	\mycaption{Local SRO vs. Quench Rate in RQ MGs}{(a) and (b) Show systematic increase in full-icosahedra and icosahedral-like fractions of \cz  RQ glasses with decrease in cooling rate, from \qr{10} to \qr{14}.}
+	\label{f:voro_qr}
+\end{figure}
+\end{changebar}
+
+First, the behaviour of the simulated RQ MGs with varying quench rate, but at a fixed composition (\cz), is verified. Figure~\ref{f:voro_qr}a shows the top seven highest occurring Voronoi indices in \cz  RQ glasses quenched with cooling rates \qr{10}, \qr{12}, \qr{13}, and \qr{14}. The percentage of atoms exhibiting the \vi{0}{0}{12}{0} index, representing the \gls{fi} coordinations, is seen to increase with lowering quench rates. In Figure~\ref{f:voro_qr}b, the sorted categories (as described in Section~\ref{s:voronoi}) of \gls{vp} are described. Firstly, the lack of any crystalline coordinations indicates that all these \gls{rq} \gls{mg}s have amorphous \gls{sro}. While it can be seen that the \gls{ilike} coordinations also increase with decreasing quench rate, concurrently one can also notice the decrease in the ``other"-or-miscellaneous coordinations, which are known to be indicators of glass instability (for more details on the four prominent classes of \gls{vp}, see Section~\ref{s:voronoi}). Decreasing the quenching rate improves the \gls{fi} and \gls{ilike} fractions. These results are in agreement with previous knowledge \cite{Yue2018,Berthier2016}, that lowering the glass quench rate correlates with increased \gls{ilike} packing and stability. \par
+
+\begin{changebar}
+	\begin{figure}[h]
+		\centering
+		\begin{subfigure}{0.45\linewidth} \centering \includegraphics[height=0.4\textheight]{voronoi_CuZr_MG_asp_All} 
+			\subcaption{} \end{subfigure}%
+		\begin{subfigure}{0.45\linewidth} \centering \includegraphics[height=0.4\textheight]{voronoi-sort_CuZr_MG_asp_All} 
+			\subcaption{} \end{subfigure}%
+		\mycaption{Local SRO vs. Composition in RQ MGs}{(a) and (b) show the increase of full-icosahedral (\vi{0}{0}{12}{0}) and icosahedral-like fractions with increase in composition from \cz, to Cu$_{60}$Zr$_{40}$ to \czsix  for \qr{12} MGs.}
+		\label{f:voro_comp}
+	\end{figure}
+\end{changebar}
+
+Next, the \gls{fi} and \gls{ilike} fractions in RQ MGs was studied with respect to composition at a fixed quench rate. \cz, \czsf, and \czsix  glasses made at a quench rate of \qr{12} were studied. From Figure~\ref{f:voro_comp}a-b, two observations can be made. Firstly, with increasing Cu composition in CuZr metallic glasses while keeping the quench rate fixed, the \gls{fi} and the \gls{ilo} increase. This observation is consistent with results from previous works \cite{Peng2010,Ritter2012,Li2009a}. Secondly, a concurrently decrease in the defective coordinations marked as ``other" is observed. In CuZr glasses, increase in Cu seems to improve \gls{gfa}. \par
+%\newpage
+
+\begin{figure} %[h] %[!h]
+	\centering
+	\begin{subfigure}{\linewidth} \centering
+		\includegraphics[width=0.7\linewidth]{pe-atom_Cu50Zr50_MG_asp}
+		\subcaption{P.E. vs Quench Rate}
+	\end{subfigure}%
+	\vfill
+	\begin{subfigure}{\linewidth} \centering
+		\includegraphics[width=0.7\linewidth]{pe-atom_CuZr_MG_asp}
+		\subcaption{P.E. vs Composition}
+	\end{subfigure}	
+	\mycaption{P.E. vs Composition and Quench Rate in RQ MGs}{\gls{pe} per Atom distribution for (a) \cz  MGs with changing quench rates \qr{10}, \qr{12}, and \qr{14}; and (b) \qr{12} RQ metallic glasses of varying composition: \cz,  \czsf  and \czsix. The insets describes the average potential energies of the glasses.}
+	\label{f:pe_mgs}
+\end{figure}
+
+\subsection{Potential Energy of MGs}  \label{s:pe-mgs}
+The \gls{pe} of the simulated RQ MGs were analysed with respect to both the cooling rate and the compositional changes in CuZr \gls{rq} \gls{mg}s. Figure~\ref{f:pe_mgs} shows the normalized \gls{pe} distributions of the \gls{mg}s. Two distinct distributions are observed; one for the Cu atoms, and one for the Zr atoms. The Zr atoms are found to occupy lower energies on average compared to the Cu atoms. For the \cz  \qr{10} MGs, Cu peak occurs at $\sim$-3.52 eV/atom and the Zr peak at $\sim$-6.45 eV/atom. In the inset of the figures, the average \gls{pe} of each atom; i.e, the area under the graph is represented. In Figure~\ref{f:pe_mgs}a, it is noticed that the average P.E. of the RQ MGs reduces with quench rate, this is as expected in literature \cite{Yue2018,Berthier2016}. The relative peak shifts are not noticeably different from one another. However, no further analysis has been attempted to characterize the nature of these distributions. Yet another trend is observed, in Figure~\ref{f:pe_mgs}b, where Cu-Zr RQ MGs of \qr{12} are contrasted with one another: with increasing Cu concentration, the average P.E. notably increases. This change is correspondingly noticed in the P.E./atom distributions: the peak height of Zr drops with composition (and that of Cu increases), owing to the decrease in stoichiometric population of Zr atoms. Furthermore, with the peak centers also being shifted to the right, it is confirmed that both the Cu and Zr atoms, on an average, occupy high energy states in glasses with higher Cu concentration. The relative increase in Cu concentration has a stronger influence in the change of energy states of metallic glasses, than does the quench rate. \par
+
+\subsection{Atomic Volume Distributions of MGs}  \label{s:vol-mgs}
+Similar to the Sections~\ref{s:voro-mgs}~and~\ref{s:pe-mgs}, the RQ MGs are also contrasted with each other in terms of atomic volume, while varying both composition and quench rates. In Figure~\ref{f:vol_comp}, the normalized distributions of atomic volume occupancy is shown; in the inset, the average volume per atom (area under the curve) is described. Like in Figure~\ref{f:pe_mgs}, two separate distributions are once again observed for the Cu and Zr atoms. The Cu atoms are seen to occupy a lower volume on average in comparison to Zr atoms, influenced by their respective atomic radii (Cu: 1.35 \r{A}, Zr: 1.55 \r{A}). With increasing Cu composition, the Cu peak height increases, yet it shifts to the left on the x-axis. The opposite trend is observed for Zr atoms. The resulting effect is seen on the average atomic volume: which reduces with increase in Cu composition (see Figure~\ref{f:vol_comp} inset). CuZr glasses with a higher concentration in the range of compositions explored tend to be better packed. \par
+
+Next, the relationship between volume distributions of \cz  glasses and their quench rates were investigated. Figure~\ref{f:vol_quench}a shows the volume distributions of the Cu and Zr atoms. The occurence of the peaks is similar to that in Figure~\ref{f:vol_comp}. In the inset of Figure~\ref{f:vol_quench}a are the calculated values of the average atomic volumes per atom in the RQ MGs. Here, no clear trend is observed. Furthermore, it is noticed that the \qr{10} glass has the highest volume, i.e, the lowest density. These findings are in disagreement with previous knowledge \cite{Berthier2016,Yue2018}. \par
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{pe-atom_CuZr_MG_asp}
+	\mycaption{Volume Occupancy vs Composition in RQ \qr{12} MGs}{Volume distribution for \qr{12} metallic glasses of varying composition: \cz, \czsf and \czsix. The inset describes the average \gls{pe} (or \gls{pe} per atom) for the three glasses.}
+	\label{f:vol_comp}
+\end{figure}
+
+\begin{figure}%[!h]
+	\centering
+	\begin{subfigure}{\linewidth} \centering
+		\includegraphics[width=0.9\linewidth]{vol-atom_Cu50Zr50_MG_asp_All}
+		\subcaption{Volume vs Quench Rate}
+	\end{subfigure}	%
+	\vfill
+	\begin{subfigure}{\textwidth} \centering
+		\begin{subfigure}{0.33\textwidth} \centering \renewcommand\thesubfigure{\alph{subfigure}1}
+			\includegraphics[width=\textwidth]{50-50/post/volume_2} \caption{}
+		\end{subfigure}%
+		%	\hfill
+		\begin{subfigure}{0.33\textwidth} \centering \renewcommand\thesubfigure{\alph{subfigure}2} 	\addtocounter{subfigure}{-1}
+			\includegraphics[width=\textwidth]{50-50/post_8000/volume_8000} \caption{}
+		\end{subfigure}%
+		%	\hfill
+		\begin{subfigure}{0.33\textwidth} \centering  \renewcommand\thesubfigure{\alph{subfigure}3} \addtocounter{subfigure}{-1}
+			\includegraphics[width=\textwidth]{50-50/post_8000m/volume_8000m} \caption{}
+		\end{subfigure}
+		\addtocounter{subfigure}{-1}
+		\subcaption{Volume vs Temperature: Varying RQ MG Preparation}
+	\end{subfigure}
+	\mycaption{Volume Occupancy vs Quench rate in \cz  RQ MGs}{(a) Volume occupancy in RQ MGs quenched at rates between \qr{10}-\qr{14} (b) Volume evolution during quenching (b1) as in Section~\ref{s:simtestMG} (b2) starting with 8192 atoms at 2000 K (b3) 8192 atoms melted from 50 K before quenching.}
+	\label{f:vol_quench}
+\end{figure}
+
+For this reason, it was important to verify the simulation technique chosen to prepare \gls{rq} \gls{mg}s in Section~\ref{s:simtestMG}. Firstly, in the method used, the total number of atoms in the simulation were not equal for the MGs of varying quench rates. Next, the melt of the binary alloy was obtained by directly setting the temperature of the atoms to 2000 K for 2 ns. It could be suspected that the melting of the metallic glass before the quenching was not simulated well enough. To reveal the influences of these two processing steps, some additional simulations sets were performed for each of the \qr{10}, \qr{12} and \qr{14} MGs: 1. The MGs were simulated with equal number of atoms, 2. an additional melting step was performed before quenching. \par 
+
+In Figure~\ref{f:vol_quench}b1-b3, the volumes were recorded with respect to the temperature, as the quenching process occurred. In the inset, the temperature (T) is also plotted as a function of the simulation timesteps. Figure~\ref{f:vol_quench}b1 depicts MGs that were treated by the same process as in Section~\ref{s:simtestMG}. In Figure~\ref{f:vol_quench}b2, all RQ MGs had the 8192 atoms in the box. Next, in Figure~\ref{f:vol_quench}b3, all RQ MGs had the same number of atoms and additionally a 2 ns melting step was performed. The initial random mixture of atoms were first equilibrated at 50 K, melted to 2000 K, equlibrated for 2ns, and then quenched. In the three processes, however, the volume behaviour during cooling is not reproduced correctly for the glasses. Moreover, at 50 K, volume fluctuations---significantly higher than a volume change occuring by a temperature increase of 50 K--are seen as indicated in the insets of Figures~\ref{f:vol_quench}b1-b3. Visually, the glass transition is estimated to be around 600 K, however, a more rigorous estimate has not been attempted for these RQ MGs in this section. However, the enthalpy evolution with temperature during cooling for the \gls{rq} \gls{mg}s of varying quench rates, described in Figure~\ref{f:enth_quench} in the \nameref{c:supple}, and also briefly in Chapter~\ref{c:cbmg} follows expected trends \cite{Berthier2016,Ediger1996}. \par
+
+\begin{figure}%[!h]
+	\centering
+	\begin{subfigure}{0.5\textwidth}
+		\includegraphics[width=\textwidth]{64-36/post_8000/volume_8000}
+		\caption{}
+	\end{subfigure}%
+	\begin{subfigure}{0.5\textwidth}
+		\includegraphics[width=\textwidth]{64-36/post_8000m/volume_8000}
+		\caption{}
+	\end{subfigure}
+	\mycaption{Volume Evolution vs Quench Rate in \czsix  RQ MGs}{Volume evolution during cooling of RQ MGs quenched at rates between \qr{12}-\qr{14} with (a) 8192 atoms quenched from 2000 K, and (b) 8192 atoms melted from 50 K before quenching.}
+	\label{f:vol_quench64}
+\end{figure}
+
+To cross-verify the observations made from Figure~\ref{f:vol_quench}b, the volume vs temperature behaviour was also studied as a function of quench rates in \czsix  RQ MGs, which is close to the Cu$_{64.5}$Zr$_{35.5}$ composition validated by the developers of the Cu-Zr glass potential \cite{Mendelev2019}. Starting with a box of 8192 atoms in the box, the glass quenching was performed for atoms equilibrated at an inital temperature of 2000 K (Figure~\ref{f:vol_quench64}a), and also atoms which were first set to 200 K, melted to 2000 K, and then quenched to 50 K (Figure~\ref{f:vol_quench64}b). For both treatments, the volume of the RQ MGs presented lots of fluctuations during cooling. For the case of direct quenching from the 2000 K, the expected trend of enhanced packing with lower quench rates is not seen below 75 K. The desired effects were only observed in the \czsix RQ MGs which were first melted from 50 K to 2000 K before quenching. In both the cases, however, the final average volumes of the glasses fluctuate significantly at 50 K, in comparison to thermal effects as seen in Figures~\ref{f:vol_quench}b1-b3. \par 
+
+Based on the above simulations, it was inferred that the while influenced of compositional changes in the RQ MG volume behaviour is easily observable, the effects of quenching rate on the glass volumes are not well reproduced by the \gls{eam} potential used. The effects of alternatively available, but older \gls{eam} potentials \cite{Cheng2008,Mendelev2009} has not been attempted in this thesis.
+
+%\input{chapters/development/cluster.tex}
+\section{Cluster Synthesis} \label{s:clus}
+
+\begin{changebar}
+In the present work, the structure of CAMGs with a specific size of the clusters as a function of impact energy is studied using MD simulations. The structure of CAMGs will be compared to MGs prepared by RQ. The CAMGs structure will also be compared to NGs prepared by compaction process using the same original clusters as for the simulation of the CAMGs. \par
+\end{changebar}
+
+The clusters generated in the CIBD experiments \cite{Benel2018,Benel2019} were generated via \gls{igc} (see Section \ref{c:theory} for more details). The cluster growth was simulated earlier to simulate \gls{ng}s using a Kob-Anderson model in reference \cite{Danilov2016}, by what the authors termed as \gls{pvd} of the nanoparticles. To replicate this method with the more expensive \gls{eam} potentials, the procedure had to be optimized for computational time. An algorithm to periodically condense gaseous Cu and Zr atoms and to form a cluster was designed. Typically, inert gas atoms have also been modelled in previous \gls{igc} simulations \cite{Krasnochtchekov2003,Krasnochtchekov2005}, but this present model does not take it into consideration. Instead, the gaseous Cu and Zr are periodically cooled before aggregation into the cluster.The temperature of the cluster and the gaseous atoms are controlled using a thermostat (NPT in LAMMPS).  To reduce computational time, regular checks were made during the condensation process delete atoms straying away from the cluster. The growth rate of the cluster was chosen arbitrarily, and the chemical potential effects were not accounted for. Upon testing, the simulation protocol was found to not be stable. As a workaround to additional modelling and testing of the \gls{igc} simulation, an alternative method of deriving clusters from the bulk of a simulated RQ MG was chosen. \par
+
+\begin{figure}[t]
+	\centering
+	\begin{subfigure}{0.5\textwidth} 	\centering
+		\includegraphics[width=\textwidth]{3nm/50-50/post/comp_3nm} \caption{}
+		\label{f:radial_3nm}
+	\end{subfigure}%
+	%\vfill
+	\begin{subfigure}{0.5\columnwidth} 	\centering
+		\includegraphics[width=\textwidth]{3nm/50-50/post/comp_3nm (copy)} \caption{}
+		\label{f:radial_3nm_alt}
+	\end{subfigure}%
+	\mycaption{3 nm \cz  Cluster Chemical Substructure}{A radial compositional analysis with concentric bands chosen with (a) 0.2 nm thickness and (b) fixed population of $\sim$50 atoms, reveals Cu segregration to the surface, which form the basis to define a core-shell structure.}
+	\label{f:clus_rad-3nm}
+\end{figure}
+
+\begin{changebar}
+Consequently, in a first step, a free-standing cluster was prepared by cutting a sphere of 3 nm diameter (with ~800 atoms) from a \qr{10} \cz-MG\footnote{The \qr{10} quench rate is the conventional value used in literature \cite{Ritter2011,Adjaoud2016,Adjaoud2018}. Apart from Sections~\ref{s:simtestMG}, \ref{s:camg_quenchrt}, and \ref{s:mgsquench}, the all the simulated glassy systems in this dissertation are made from \qr{10} \gls{rq} \gls{mg}s.} held at 50 K temperature. The resulting cluster was found to be approximately at a \cz composition (with a ~1\% deviation). This compositional deviation is not significant to the following studies on glass \gls{sro}, as evident from previous \gls{md} studies \cite{Peng2010}. As reported earlier by \textcite{Adjaoud2016}, any cluster develops surface stresses  immediately after cutting. The slow kinetics at 50 K prevent the atoms from relaxing to their lowest energetic state. Therefore, a short-time increase of the temperature of the cluster, which increases the mobility of the atoms, allows to obtain a configuration similar to a cluster synthesized in a real experiment by \gls{igc}. Thus, the protocol developed in reference \cite{Adjaoud2016}, viz., heating the cluster shortly to 1000 K, i.e., beyond the glass-transition temperature \gls{tg}, followed by cooling it back to 50 K, was employed. Both the heating and cooling were performed at a rate of 2.5 $\times$ \qr{12}. Although \gls{tg} is crossed in the simulation, crystallization is avoided (see Section~\ref{s:vorocamg}) due to the short heating time; sufficient diffusion occurs over the short distances to establish a concentration profile in the cluster. In addition, the cluster was equilibrated for 2 \gls{ns} both after the cutting and after the heat treatment. The heat treatment on the cluster and its effect on the structure of the cluster is visualized in Figures \ref{f:clus_rad-3nm} and \ref{f:clus_comp-3nm} for a cluster derived from the \qr{10} MG, and are discussed below. \par
+\end{changebar}
+
+It was reported in earlier experiments of small CuZr clusters, of 20-30 atoms in size, that the Cu atoms segregated to the surface \cite{Kartouzian2014}. This chemical segregation, also observed in granular matter and dubbed the ``Brazil-nut" effect \cite{Rosato1987}, influences the local chemical homogeneity in the length scales comparable to the 3 nm cluster in the simulations. This surface segregation is driven by the different surface energies of the Cu and Zr atoms, and their heat of mixing \cite{Wang2016,Adjaoud2016}.  To verify the radial variation of the chemical segregation in the cluster, the Cu and Zr compositions in 0.2 nm thick bands at various radii within the simulated spherical cluster were plotted as a function of the said radii in Figure~\ref{f:clus_rad-3nm}a. \par 
+
+\begin{changebar}
+	\begin{figure}%[!h]
+		\centering
+		\includegraphics[width=\textwidth,trim={0 1cm 0 1cm},clip]{camg_3nm/1.pdf}
+		\mycaption{3 nm \cz Cluster Core-shell Composition Evolution}{Copper atoms diffusing out of a 13 \r{A} shell (the core-shell structure is depicted in the inset) of 2\r{A} thickness. The Cu composition decreases in the core and correspondingly increases in the shell, as the cluster is heated up to and beyond \gls{tg}.}
+		\label{f:clus_comp-3nm}
+	\end{figure}
+\end{changebar}
+
+The inverse of the square root of the total population $1/\sqrt{N_{band}}$ is also depicted to estimate the error. At lower radii ($\leq$ 8 \r{A}) the population in the band is low, and the error is high. In the intermediate radii ranges of 8 \r{A}$\leq r \leq$ 13 \r{A}, the Cu and Zr compositions fluctuate around 50 at. \%. From 13-15 \r{A}, Cu and Zr compositions are seen to increase and decrease with increasing band radius. This is indicative of the Cu segregation. Beyond 15 \r{A}, the bands extend outside the volume of the shell, capture only a few of the outer atoms of the cluster, which happen to be predominantly Cu as well. For this reason, the error estimate $1/\sqrt{N_{band}}$ increases for $r \geq $ 15 \r{A}. This behaviour seen in Figure~\ref{f:clus_rad-3nm}a was also replicated in Figure~\ref{f:clus_rad-3nm}b, where the bands were chosen to be equi-populated with $\sim$50 atoms, instead of having the same band thickness. In this case, the error estimate remains constant. Nevertheless, the presence of a chemical segregation is observed. \par
+
+%\newpage
+
+\begin{changebar}
+In Figure~\ref{f:clus_comp-3nm} the evolution of the Cu composition in the 0.2 nm thick shell at a radius of 1.3 nm is shown. Up to a time t = 2 ns, when the cluster is equilibrated at 50 K, the Cu composition remains constant. The heating and cooling spike of the cluster between t = 2 ns and t=$\sim$3 ns results in a sharp increase of the Cu-concentration in the outer shell compared to the bulk composition, eventually leveling off at about 56.48 at. \%. In the remaining core volume, the Cu concentration decreases to 44.59 at. \%. While the overall composition of the 3 nm cluster remains unchanged, two distinct regions are seen in the equilibrated cluster---a core region with a lower Cu concentration, and a shell region with a substantially higher Cu concentration. The inset in Figure \ref{f:clus_comp-3nm}a depicts the core (colored magenta) and shell (colored yellow) regions of the cluster. As in other reports, Cu-atoms segregate towards the cluster surface---increasing the Cu concentration by 9 at. \% as compared to the initial homogeneous composition. \end{changebar} In Figure~\ref{f:clus_comp-3nm}b, the Zr-concentration in the core and shell are plotted as a function of time. It can be seen that drop in the Zr-concentration in the shell is concurrent with the Cu-enrichment. The Cu-atoms are enriched in the shell, while the Zr-atoms are enriched in the core. This elemental segregation was also confirmed by subjecting the cluster multiple heat-spikes (see Figures~\ref{f:heatspike}~and~\ref{f:heatspike-100} in \nameref{c:supple}). 100 additional heat-spikes were given to the \cz cluster, and Cu-enrichment in the shell was evaluated over the course of the heat-treatments. In contrast to the average Cu-concentration of 57\% in the first initial heat-treatment, the Cu concentration oscillated around 59\% through the subsequent 100 heat-spikes. Even with additional heat-treatment, the average increase is only 2\%, compared to an initial increase of 7\%. \begin{changebar} This compositional variation on the length scale of the cluster size is carried over to the interfacial regions between clusters upon compaction or energetic impact. From previous studies it is known that such chemical heterogeneities in compacted NGs on the nanometer length scale stabilize the amorphous structure \cite{Adjaoud2016}. \par
+\end{changebar}
+
+Apart from heating the cluster shortly above the \gls{tg}, it was attempted within this doctoral work to find an equilibrium cluster strucuture using \gls{mc} techniques on \gls{lmp}, to perform MC swaps with the Metropolis criterion. However, for the cluster size of 800 atoms, the MC simulation did not converge. Another alternative is to perform MC using the \texttt{vcsgc} package on LAMMPS, which is specifically designed for atomistic precipitation in alloys \cite{Sadigh2012}. However, this package is unfortunately optimized for multi-million atom simulations and maybe useful to simulate chemical segregation in large nanoparticles. \par
+
+\section{Modelling Cluster-assembled Metallic Glasses} \label{s:camgdev}
+%\input{chapters/development/single_clus.tex}
+\subsection{Single Cluster Deposition}
+\begin{changebar}
+With the cluster prepared, the next course of study towards understanding \gls{camg}s is the simulation of deposition of single clusters on a surface, as depicted in Figure~\ref{f:cibdsmod}a. These simulation conditions were performed to represent closely the experimental conditions in the \gls{cibd} experiments, in terms of cluster size and range of impact energies \cite{Benel2018,Benel2019}. In the \gls{cibd} experiments, CuZr clusters are generated as charged cluster-ions and then guided as a particle-beam towards the substrate using an electric field. The strength of the said electric field determines the impact energy of the cluster ions onto the substrate.  In the present simulation, a classical momentum was given to the cluster to mimic the cluster-acceleration in the experiments, when they pass through the electric field. Furthermore, in the experimental \gls{cibd} set-up, the substrate is electrically grounded to prevent any charge buildup on the surface \cite{Fischer2015}. Therefore, the deposition process can be modelled with classical molecular dynamics without taking electrodynamics into account. \par
+
+\begin{figure}[h]
+	\centering
+\begin{subfigure}{0.45\textwidth}
+	\includegraphics[width=\textwidth,trim={0 0 5cm 0.5cm},clip]{cibd.png}
+	\caption{}
+\end{subfigure}%
+%	\hfill
+\hspace{1cm}
+%	\hspace{-4cm}
+\begin{subfigure}{0.45\textwidth}
+	\includegraphics[width=\textwidth,trim={5cm 0 0 0.5cm},clip]{cibd-xsec-slice.png}
+	\caption{}
+\end{subfigure}
+\mycaption{Substrate Model for Deposition of 3 nm Cluster}{(a) The cluster is deposited onto a substrate, with a given energy. (b) The cross-sectional view of the film is as shown, with a mixing/buffer layer and thermostatted layer. The third fixed layer gives rigidity to the substrate.}
+\label{f:cibdsmod}
+\end{figure} 
+
+In terms of the thermodynamics, the cluster is modelled as a closed system (micro-canonical ensemble). A simplification, which was made in the MD simulations, is the replacement of the oxidized Si-substrate used in the experiments \cite{Benel2018,Benel2019} with an amorphous \cz  substrate, equilibrated for 2 ns. The crossection of Figure~\ref{f:cibdsmod}a, illustrated in Figure~\ref{f:cibdsmod}b shows a layered thermal model with the following configuration used to represent the substrate: 1. the top layer (modelled as a micro-canonical ensemble) serving as a buffer between the clusters and the substrate, 2. the middle layer being coupled with a heat sink, using a Nosé-Hoover thermostat to hold the substrate temperature at 50 K, and 3. the bottom layer, with atoms held fixed to mimic the rigidity of the substrate. The buffer and thermostatted layers had a minimum thickness of two-atom layers. \par 
+
+It is important to note that all three layers are essential to model the substrate. Without the first layer, the deposited atoms would immediately quench onto the substrate. The second layer accounts for temperature control, the lack of which would have led to a thermally unstable (explosive) substrate caused by its inability to expel sufficient amounts of energy from the system. Furthermore, without the third layer, the substrate would have no mechanical rigidity, and the clusters will simply pass through the substrate at higher energies. The layer model was configured in accordance with previous \gls{md} thin film studies \cite{Haberland1993,Haberland1995,Rahmati2020}. For the case of the single cluster depositions, a semi-hemispherical layout was utilized for the thermostatted layer to account for a spherical shockwave that passes through the substrate. For these single cluster depositions, the substrate length and width were chosen to be 6 nm: two times as wide as the cluster diameter. \par
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.45\linewidth]{3nm/post/clus_asph.png}
+\mycaption{Convergence of Cluster Deposition Simulation}{The asphericity of the cluster serves as a metric to evaluate that 2 ns after deposition, a single deposited cluster deforms no further (See text for more details)}
+\label{f:cibdsasph}
+\end{figure}%
+
+The thickness of the first two layers (buffer and thermostatted layers) can affect the heat absorption and also the hardness of the substrate. Consequently, the dissipation of the energy introduced to the film-substrate system by the cluster deposition is influenced by the specific design of the layers.  For the present substrate model, the deposition of a single cluster was inspected at large timescales. \end{changebar} Figure~\ref{f:cibdsasph} shows the evolution of asphericity of the single cluster upon deposition. The asphericity of the cluster is defined as the ratio of the radii of the cluster in the deposition direction ($R_{Z}$ in Z-axis) to that the deposition plane ($R_{XY}$ in the XY plane). The undeposited cluster, which is spherical, intially has a $R_{Z}/R_{XY}$ =1, and as the cluster deforms monotonically with the impact energy, the $R_{Z}/R_{XY}$ decreases further. After deposition, the $R_{Z}/R_{XY}$ demonstrates a dip, and eventually the simulation converges, as seen at even 2 ns after the cluster deposition. \par
+
+
+%\input{chapters/development/multi_clus.tex}
+\subsection{Multiple Cluster Deposition}
+\begin{changebar}
+Following the simulations of deposition of single clusters, the deposition of multiple clusters to form \gls{camg} films was modelled. A large \cz  substrate of dimensions 25 nm $\times$ 25 nm $\times$ 3 nm, consisting of about $\sim$75,000 atoms was chosen. As described in the previous section, the substrate model is tri-layered with flat substrate layers (see Figure~\ref{f:cibdmmod}). Both the buffer and thermostatted-layer are set to an initial temperature of 50 K. % As an initial test, single cluster depositions on this larger substrate were also found to relax after 2 ns (see Figure S4a in Supplementary Information). %Therefore, each cluster is allowed to relax for 2 ns after deposition before another cluster is deposited next or on top to it.
+In the \gls{camg} experiment \cite{Benel2019}, the clusters are polydisperse in nature, with a log-normal size distribution, while in the present simulations, however, each cluster is chosen to be of the same size. In addition, each cluster is allowed to rotate by three random Euler angles before deposition to ensure a random configuration in the \gls{camg} film samples. The simulation was performed with periodic boundary conditions in the XY plane. \par
+
+\begin{figure}[h]
+%	\begin{subfigure}{\textwidth}
+%		\includegraphics[width=\textwidth,trim={0cm 2.5cm 0cm 4.5cm},clip]{subs_multi.png}
+%	\end{subfigure}%
+%	\vfill
+	\begin{subfigure}{\textwidth}
+		\includegraphics[width=\textwidth,trim={0cm 1.8cm 0cm 2.5cm},clip]{subs_multi_xsec.png}
+	\end{subfigure}
+	\mycaption{Substrate Thermal Model for Multiple Cluster Deposition}{Similar to Figure \ref{f:cibdsmod}, this figure shows the substrate model for the multiple cluster deposition. The substrate is divided into three layers, in this thermal model.}
+	% it does not make sense to have individual spherical layers at each deposition site.}
+	\label{f:cibdmmod}
+\end{figure}
+
+\begin{figure}[h] \centering \includegraphics[width=0.7\textwidth]{pe-system_3nm.png}
+	\mycaption{Convergence of Deposition on the 25 nm $\times$ 25 nm Substrate}{The \gls{pe} of the cluster stabilizes with time and converges to its minimum value, the single cluster after deposition was found to relax after 2 million timesteps (2 ns) of equilibration.}
+	\label{f:multiconverge}
+\end{figure}%
+\end{changebar}
+
+In the \gls{cibd} experiments, the electric field which finally directs the beam of clusters onto the substrate is swept across the substrate surface to ensure uniform particle coverage. To replicate the experimental conditions, however, it was first attempted to sequentially deposit clusters at random locations on the substrate. First, the deposition of a single cluster onto the substrate at 60 meV/atom was studied. As seen in Figure~\ref{f:multiconverge}, the simulation was found to converge, when inspecting the average \gls{pe} 2 ns after the deposition. Hence, 2 ns is determined as the relaxation time between each sequential deposition. \par Such a simulation of clusters being sequentially deposited turned out to be computationally expensive, costing $\sim$30,000 CPU hours to deposit a layer of 50 clusters. Hence, an algorithm was developed to shorten simulation times. The schematic of the deposition algorithm is illustrated in Figure~\ref{f:randalgo} and it is described in the following steps:
+
+\begin{enumerate}[noitemsep]
+	\item A neighbourhood of a cluster is defined as the region enclosed within two-cluster-diameter-lengths.
+	\item Once a cluster is deposited, its neighbourhood is noted.
+	\item If a cluster has not been equilibrated for at least 2 ns, no depositions are allowed in its neighbourhood.
+%	\item Therefore, if an i+1$^{th}$ cluster is determined to fall in the neighbourhood of any of the $i$ clusters that is  unequilibrated, attempts are made to deposit the i+1$^{th}$ cluster elsewhere
+	\item If no deposit-able region exist on the substrate, then the already deposited film is equilibrated for 2 ns, and the next cluster is allowed to land.
+\end{enumerate}
+
+\begin{figure}[!h]
+	\centering
+	\begin{subfigure}{0.6\textwidth} \centering
+		\begin{subfigure}{0.33\textwidth} \includegraphics[width=0.9\textwidth]{grid1} \caption{} \end{subfigure}%
+		%	\hfill
+		\begin{subfigure}{0.33\textwidth} \includegraphics[width=0.9\textwidth]{grid2} \caption{} \end{subfigure}%
+		%	\hfill
+		\begin{subfigure}{0.33\textwidth} \includegraphics[width=0.9\textwidth]{grid3} \caption{} \end{subfigure}%
+		\vfill
+		\begin{subfigure}{0.33\textwidth} \includegraphics[width=0.9\textwidth]{grid4} \caption{} \end{subfigure}%
+		%	\hfill
+		\begin{subfigure}{0.33\textwidth} \includegraphics[width=0.9\textwidth]{grid5} \caption{} \end{subfigure}%
+		%	\hfill
+		\begin{subfigure}{0.33\textwidth} \includegraphics[width=0.9\textwidth]{grid6} \caption{} \end{subfigure}%
+		\vfill
+		\begin{subfigure}{0.33\textwidth} \includegraphics[width=0.9\textwidth]{grid7} \caption{} \end{subfigure}%
+		%	\hfill
+		\begin{subfigure}{0.33\textwidth} \includegraphics[width=0.9\textwidth]{grid8} \caption{} \end{subfigure}%
+		%	\hfill
+		\begin{subfigure}{0.33\textwidth} \includegraphics[width=0.9\textwidth]{grid9} \caption{} \end{subfigure}%
+	\end{subfigure}
+	\mycaption{Schematic of the Algorithm for Random Deposition of Clusters}{(a) Substrate depicted as 64 \gls{aru} grids with \gls{pbc} (b). An unequilibrated cluster (c) and its neighbourhood (d) block an area (e) of 9 \gls{aru}, resulting in a deposition in a random position (f). The new neighbourhood (g) and blocked area (h) are shown. When the cluster is equilibrated on the substrate, a new cluster (i) can be deposited in its neighbourhood.}
+	\label{f:randalgo}
+\end{figure}
+
+As seen in Figure~\ref{f:randalgo}, if the substrate is divided into chunks of a cluster-diameter length, it results in an 8$\times$8 grid i.e. 64 \gls{aru}. Then, the undepositable area around an unequilibrated cluster is 9 (3$\times$3) \gls{aru}. When the first cluster is deposited, the probability of the deposition algorithm finding a depositable-area is high (p=55/64). This probability value gradually decreases as new clusters randomly land across the substrate plane. Neverthless, the algorithm reduces the number of equilibration steps, and consequently the simulation time. Further, this method scales inversely with larger substrates, as the probability of a cluster landing in the neighbourhood of an unequilibrated cluster is greatly reduced. \par
+
+\begin{changebar}
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.53\textwidth]{film_long}
+	\mycaption{Pores in Randomly Deposited Cluster Films}{Multiple cluster deposition with the random deposition algorithm results in porous CAMG films.}
+	\label{f:random_multi}
+\end{figure}
+
+%\begin{changebar}
+	\begin{figure}[!h] 
+		\centering
+		\begin{subfigure}{0.5\textwidth} \centering
+			\includegraphics[width=\textwidth]{hcp_alg}
+			\subcaption{}
+			\label{f:hcp_dep_algo}
+		\end{subfigure}%
+		\hfill
+		%\begin{figure}[!ht]
+		\begin{subfigure}{0.5\textwidth} \centering
+			\includegraphics[width=\textwidth]{cibd_hcp}
+			\subcaption{}
+			\label{f:hcp_top}
+		\end{subfigure}
+		\mycaption{Patterned Deposition of Multiple Clusters}{(a) HCP deposition algorithm; the red (1 \& 2) and pink (1 \& 2) atoms are deposited separately. The clear and striped circles represent the clusters in the next layer. (b) Top view of one layer of deposited film atoms in the HCP pattern, colored coded by their height in Z-axis}
+		\label{f:hcpalgo}
+	\end{figure}
+%\end{changebar}
+
+Such a deposition of the clusters on the substrate at random locations in the XY plane, is visualized in Figure~\ref{f:random_multi}. The random deposition of clusters, resulted in the formation of pillars, thus shadowing certain regions of the film and leading to porous films. The growth of the porous film bore resemblance to previous statistical studies on ballistic deposition \cite{Meakin1986}. Although such pores may occur in the experiments, here a model was used to maximize inter-cluster interactions and to avoid formation of pores. An absence of surface effects from the pore formation and an increase of cluster-cluster interfaces is desirable to study the effects of interfaces in CAMGs. In order to achieve reducing the porosity, the clusters were deposited in a \gls{hcp} arrangement onto the substrate. \par
+\end{changebar}
+
+Figure~\ref{f:hcpalgo}a shows the schematic of the algorithm employed to make the HCP depositions. The HCP patterned film is first considered to be made up of one layer of clusters on the XZ plane. This layer is divided into four sublayers as depicted in Figure~\ref{f:hcpalgo}a: the red and pink clusters of types 1 and 2 each. Then the following algorithm is implemented:
+
+\begin{enumerate}[noitemsep]
+	\item Deposit Red clusters of type 1. Equilibrate for 2 ns.
+	\item Deposit Red clusters of type 2. Equilibrate for 2 ns.
+	\item Repeat steps 1-4 for the Pink clusters
+\end{enumerate}
+
+This sequential deposition of clusters by the order of the sublayer they belong to ensures that the newly deposited clusters are not in the neighbourhood of unequilibrated clusters. The algorithm allows for a nearly simultaneous deposition, the only latency between each deposition being the time taken for the cluster to reach the surface of the film. On the 24 nm $\times$ 24nm XY plane of the substrate, 52 clusters can be arranged in an HCP pattern, meaning that the deposition of the four sublayers can be done with four equilbration steps, instead of a 52 times as would be the case in a completely sequential deposition. This speeds up the deposition compared to single deposition algorithm process by a factor of 13 for the given substrate and cluster combination. Like the random deposition algorithm, this algorithm also scales better with the increase in XY dimensions of the film. A top view of a \gls{hcp} patterned deposition of 3 nm sized clusters at 60 meV/atom energy can be seen in Supplementary Video V1. \todo{Find out about adding video to dissertation} \par
+
+%\input{chapters/development/multi-comp.tex}
+\section{Modelling Nanoglasses}
+\begin{changebar}
+One of the aims of this study is to compare \gls{camg}s to metallic glasses prepared by mechanical compaction, i.e., \gls{ng}s. The results of simulations of \gls{camg}s and \gls{ng}s using the same clusters as building blocks allows a comparison of the different processing techniques, compaction for \gls{ng}s and energetic impact for \gls{camg}s. Furthermore, the structure of simulated \gls{ng}s ppared by compaction of clusters in the size range of 800 atoms has not been reported. For the simulation of the cold compaction, the clusters were inserted in a simulation box and compacted at 50 K temperature under 5 GPa pressure to yield a \gls{ng} of $\sim$300,000 atoms. In previous works, the compaction of NGs was modelled by inserting the clusters at random positions before compaction  \cite{Adjaoud2018,Kalcher2017} as this method closely resembles the actual experiments conducted to obtain NGs. The properties of such NGs are described in further detail in Chapter~\ref{c:cbmg}. \par
+
+However, when comparing the NGs with CAMGs, the clusters were inserted in a \gls{hcp} arrangement prior to compaction in order to resemble the arrangement used for the CAMGs. Such a regular cluster arrangement to make NGs has been employed in previous works as well \cite{Sopu2009,Cheng2019,Cheng2019a,Zheng2021} Once the sample was compacted at 50 K temperature and equilibrated, it was unloaded for 0.2 ns and then equilibrated again for another 2 ns. In the \gls{ng}s with clusters of sizes 3 nm (described in Chapter~\ref{c:camg}) and 7 nm (described in Chapter~\ref{c:cbmg}) prepared in this way, no pores were present, when examined using a surface mesh with a probe sphere radius of 3 \r{A} \cite{Stukowski2010a,Stukowski2014}. \par
+\end{changebar}
+
+\clearpage
+
+\section{Summary}
+The current chapter laid out the details of protocols implemented to simulate the various kinds of metallic glasses discussed in this dissertation. The simulation of CAMGs and NGs were performed using \gls{md} and \gls{eam} potential. The authenticity of the atomic potential and the modelling methods were tested by simulating \gls{rq} \gls{mg}s. The \gls{eam} potential effectively captures the vitrification of the quenched glasses, as evidenced by the PRDFs. It was also possible to reproduce the known theories for the local atomic \gls{sro} and \gls{pe} states for the MGs. Additionally, it was determined that the volume behaviour upon quenching is not accurately modelled using the potential. \par
+
+Consequently, the models used to prepare \gls{camg}s and \gls{ng}s were developed. First a cluster was simulated cutting out a spherical volume from an RQ MG. With a short-heat treatment above \gls{tg}, it was possible to induce Cu-atoms to segregate out to the cluster surface---an effect that better replicates the experiments, and desirable to create stable cluster-cluster interfaces when the \gls{cbmg}s are made. \par
+
+To understand the mechanisms of \gls{camg}s synthesis, the deposition of a single cluster onto a substrate is modelled, and the simulation is determined to have converged upon inspecting the atomic trajectories 2 ns after the deposition. To generate an entire film of clusters, one requires a deposition of multiple clusters onto the substrate. Depositing the clusters in a random fashion resulted in formation of porous films: however, this meant the reduction of number of cluster-cluster interfaces, which is desired to be studied. For this reason, an optimal HCP patterned multi-cluster parallel deposition algorithm was developed to maximize cluster-packing, removal of pores, and also featuring a 13$\times$ improvement in simulation speeds. \par
+
+Two methods of simulating \gls{ng}s were discussed. The compaction of clusters was done upon: 1. clusters being randomly inserted in a box---in the manner described by \textcite{Adjaoud2018} for NG simulations, and 2. clusters being arranged in an HCP pattern to emulate the pattern formed by the CAMGs deposited in the HCP layout. \par
+
+The \gls{lmp}-based simulation codes and workflows can be accessed with information available in Section~\ref{s:github}. Armed with this arsenal of simulation techniques \gls{cbmg}s, it is then possible to study of the \gls{camg}s  and \gls{ng}s, which motivates the discussion in the following Chapters~\ref{c:camg}~and~\ref{c:cbmg}. \par

@@ -1,0 +1,259 @@
+%% This is file `DEMO-TUDaThesis.tex' version 2.09 (2020/03/13),
+%% it is part of
+%% TUDa-CI -- Corporate Design for TU Darmstadt
+%% ----------------------------------------------------------------------------
+%%
+%%  Copyright (C) 2018--2020 by Marei Peischl <marei@peitex.de>
+%%
+%% ============================================================================
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3c
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%% http://www.latex-project.org/lppl.txt
+%% and version 1.3c or later is part of all distributions of LaTeX
+%% version 2008/05/04 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%%
+%% The Current Maintainers of this work are
+%%   Marei Peischl <tuda-ci@peitex.de>
+%%   Markus Lazanowski <latex@ce.tu-darmstadt.de>
+%%
+%% The development respository can be found at
+%% https://github.com/tudace/tuda_latex_templates
+%% Please use the issue tracker for feedback!
+%%
+%% ============================================================================
+%%
+% !TeX program = lualatex
+%%
+
+
+\documentclass[
+english,
+ruledheaders=section,%level up to which the headings are separated with lines, see DEMO-TUDaPub
+class=report,% base document class. Selects the corresponding KOMA-Script class
+%thesis={type=bachelor},% Thesis document type, for dissertations see the demo file DEMO-TUDaPhd
+thesis={
+	% For smaller theses see DEMO-TUDaThesis 
+	type=drfinal, dr=ing, department=matgeo},
+accentcolor=9c,% Accent color selection
+custommargins=true,% Margins are automatically calculated using typearea
+marginpar=false,% Header and footer do not extend beyond the margin column
+%BCOR=5mm,%binding correction if necessary
+parskip=half-,%paragraph identification by spacing see KOMA script
+fontsize=11pt,%Base font size according to corporate design is often too small at 9pt
+% logofile=example-image, %If the logo files are not available
+]{tudapub} 
+
+% The following block is only necessary for pdfTeX on versions before April 2018
+\usepackage{iftex}
+\ifPDFTeX
+\usepackage[utf8]{inputenc}%compatibility with TeX versions before April 2018
+\fi
+
+\usepackage{lmodern}
+\usepackage{fontspec}
+\newfontfamily{\tel}[Script=Telugu]{Pothana2000}
+
+%%%%%%%%%%%%%%%%%%
+%Language Customization & Improved Separation Rules
+%%%%%%%%%%%%%%%%%%
+\usepackage[english, main=german]{babel}
+\usepackage[autostyle]{csquotes}% quotes simplified
+% If compiling with pdflatex, microtype is loaded automatically, in this case this line has to be removed, and if more options are to be added, this has to be done via
+% \PassOptionsToPackage{options}{microtype}
+% must be added before \documentclass. 
+\usepackage{microtype}
+
+%%%%%%%%%%%%%%%%%%
+%Bibliography
+%%%%%%%%%%%%%%%%%%
+\usepackage{biblatex} % Bibliography
+\usepackage{glossaries}
+\bibliography{library}
+
+%%%%%%%%%%%%%%%%%%
+%Package Suggestion Tables
+%%%%%%%%%%%%%%%%%%
+%\usepackage{array} % Base package for table configuration, autoloaded by the following
+\usepackage{tabularx} % Tables that automatically adjust to the width
+%\usepackage{longtable} % Multipage tables
+%\usepackage{xltabular} % Multi-page tables with adjustable width
+\usepackage{booktabs} % Improved options for table layout using horizontal lines
+
+%%%%%%%%%%%%%%%%%%
+%Package suggestions mathematics
+%%%%%%%%%%%%%%%%%%
+\usepackage{mathtools} % enhanced version of amsmath
+\usepackage{amssymb} % extended character set
+%\usepackage{siunitx} % units
+
+%Formatting for examples in this document. Generally not necessary!
+\let\file\texttt
+\let\code\texttt
+\let\tbs\textbackslash
+\let\pck\textsf
+\let\cls\textsf
+
+\usepackage{setspace}	%spacing
+\usepackage{enumitem} 
+\usepackage{amsfonts,xcolor,graphicx,multicol,titlesec,ragged2e}
+\usepackage{float}
+\usepackage[a4paper,bindingoffset=0in,top=0.55 in,bottom=0.50in, footskip=.25in]{geometry}
+\usepackage{mdframed}
+\newmdenv[
+topline=false,
+bottomline=false,
+linecolor = gray,
+skipabove=\topsep,
+skipbelow=\topsep
+]{siderules}
+\usepackage[font=sf, labelfont={sf,bf}, margin=1cm]{caption}
+\usepackage[font=sf, labelfont={sf,bf}, margin=1cm]{subcaption}
+
+\graphicspath{{/home/mj0054/Documents/work/posters_talks/images/}{/home/mj0054/Documents/work/simulations/results/cuzr/CAMG_3nm/}{/home/mj0054/Documents/work/simulations/projects/cibd/cibd_single/1e10/}{/home/mj0054/Documents/work/simulations/projects/clusters/1e10/}{../figures/}{/home/mj0054/Documents/work/simulations/results/cuzr/MSR_compositions/}{/home/mj0054/Documents/work/simulations/results/cuzr/MSR_cooling_rates/}{/home/mj0054/Documents/work/simulations/projects/bulk/msr/50-50/}}
+
+\loadglsentries{glossary}
+
+\usepackage{pifont}% Zapf-Dingbats Symbole
+\newcommand*{\FeatureTrue}{\ding{52}}
+\newcommand*{\FeatureFalse}{\ding{56}}
+
+\newcommand{\cz}{\mbox{Cu$_{50}$Zr$_{50}$} }
+\newcommand{\czsix}{\mbox{Cu$_{64}$Zr$_{36}$} }
+\newcommand{\fs}{\mbox{Fe$_{80}$Sc$_{20}$} }
+\newcommand{\vi}[4]{\mbox{$<${#1} {#2} {#3} {#4}$>$}}
+\newcommand{\s}[2]{{#1}$_{#2}$}
+\newcommand{\qr}[1]{\mbox{$10^{{#1}}$ K/s}}
+\newcommand\mycaption[2]{\caption[#1]{\textbf{#1}: #2}}
+
+
+\begin{document}
+
+\Metadata{
+	title=Molecular Dynamics Simulations of Cluster-based Metallic Glasses,
+	author=Syamal Praneeth Chilakalapudi
+}
+
+
+\frontmatter
+
+\title{Molecular Dynamics Simulations of Cluster-based Metallic Glasses}
+%\subtitle{\LaTeX{} using TU Darmstadt's Corporate Design}
+\author[S. P. Chilakalapudi]{M.Sc. Syamal Praneeth Chilakalapudi}%optionales Argument ist die Signatur,
+\birthplace{Hyderabad, India}%Geburtsort, bei Dissertationen zwingend notwendig
+\reviewer{Prof. Dr.-ing Horst Hahn \and Prof. Dr. Wolfgang Wenzel} % \and noch einer \and falls das immernoch nicht reicht}%Gutachter
+%Falls die Bezeichner entsprechend der Promotionsordnung angepasst werden sollen:
+%\reviewer*[Erstreferent\_in,Koreferent\_in]{Gutachter 1 \and Gutachter 2}
+\publishers{Darmstadt}% Feld für die Ortsangabe oder einen Verlag. Dies ist mit Darmstadt -- D17 vorbelegt, s.u. jedoch wurde die Anforderung für diese Vorgabe reduziert, daher genügt auch die Ortsangabe.
+
+
+%%Sofern keine passende Option verfügbar ist
+%\drtext{}
+
+%Diese Felder werden untereinander auf der Titelseite platziert.
+%\department ist eine notwendige Angabe, siehe auch dem Abschnitt `Abweichung von den Vorgaben für die Titelseite'
+%\department{phys} %Kürzel werden entsprechend der Liste in diesem Dokument ersetzt.
+%\institute{Institut}
+\group{Research Unit Nanomaterials}
+
+\submissiondate{\today}
+\examdate{\today}
+
+% Hinweis zur Lizenz:
+% TUDa-CI verwendet momentan die Lizenz CC BY-NC-ND 2.0 DE als Voreinstellung.
+% Die TU Darmstadt hat jedoch die Empfehlung von dieser auf die liberalere
+% CC BY 4.0 geändert. Diese erlaubt eine Verwendung bearbeiteter Versionen und
+% die kommerzielle Nutzung.
+% TUDa-CI wird im nächsten größeren Release ebenfalls diese Anpassung vornehmen.
+% Aus diesem Grund wird empfohlen die Lizenz manuell auszuwählen.
+%\tuprints{urn=1234,printid=12345,doi=10.25534/tuprints-1234,license=cc-by-4.0}
+\tuprints{urn=1234,printid=12345}
+% To see furhter information on the license option in English, remove the license= key and pay attention to the warning & help message.
+
+\dedication{{\tel నా  పెద్దల  ఆశీస్సులు  కోరుతూ}}
+
+\maketitle
+
+\affidavit
+
+\addchap{Foreword}
+ DEMO-TUDaPub zu Problemen führen. In diesem Fall sollte entweder der Compiler gewechselt oder \code{pdfa=false} aktiviert werden.
+
+
+\minisec{Unterschiede der Demodateien DEMO-TUDaThesis und DEMO-TUDaPhD}
+Zwar basieren alle drei DEMO-Dateien auf der Klasse \code{tudapub}, allerdings sind die Basiseinstelungen dem Dokumententyp angepasst.
+
+
+\begin{abstract}
+	Deutsche Zusammenfassung
+\end{abstract}
+
+\begin{abstract}[english]
+	Englische Zusammenfassung, falls benötigt
+\end{abstract}
+
+\begin{spacing}{1}
+	\tableofcontents{}
+\end{spacing}
+\newpage
+
+\addcontentsline{toc}{chapter}{List of Figures}
+\begin{spacing}{1}
+	\listoffigures
+\end{spacing}
+\newpage
+
+
+\chapter*{Abbreviations}
+\addcontentsline{toc}{chapter}{Abbreviations}
+%\printglossaries
+%\printacronyms
+
+%\chapter*{Abstract/Zusammenfassung}
+\addcontentsline{toc}{chapter}{Abstract}
+
+\setcounter{chapter}{0}
+\mainmatter
+
+\chapter{Introduction} \label{c:into}
+\input{chapters/introduction.tex}
+
+\chapter{Theoretical background} \label{c:theory}
+\input{chapters/background.tex}
+
+\chapter{Methods} \label{c:methods}
+\input{chapters/methods.tex}
+
+\chapter{Simulating Cluster-assembled Materials} \label{c:dev}
+\input{chapters/development.tex}
+
+\chapter{Structure and Packing of Cluster-assembled Metallic Glasses (CAMG)} \label{c:camg}
+\input{chapters/3nm_CAMG.tex}
+
+\chapter{Cluster size effects on Cluster-based Metallic Glasses} \label{c:cbmg}
+\input{chapters/1nm-7nm.tex}
+
+\chapter{Conclusions}
+\input{chapters/conclusions.tex}
+
+%\addcontentsline{toc}{chapter}{Appendix}
+
+\addcontentsline{toc}{chapter}{A1 Disclaimer}
+
+\addcontentsline{toc}{chapter}{A2 Acknowledgements}
+
+\addcontentsline{toc}{chapter}{A3 Simulation Repository}
+
+\addcontentsline{toc}{chapter}{A4 Curriculum Vitae}
+
+\bibliographystyle{natnourl}
+
+%Weitere Verzeichnisse wie \listoffigures oder ein  Abkürzungsverzeichnis
+
+
+\printbibliography
+
+\end{document}

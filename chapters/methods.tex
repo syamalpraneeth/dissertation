@@ -1,0 +1,229 @@
+\chapter{Methods} \label{c:methods}
+As discussed in Chapter~\ref{c:theory}, simulating a \gls{mg} is an effective route to understanding its structure-property relationships. Atomistic simulations complement experiments by providing insights into functional and mechanical behaviour. Traditionally, \gls{mg}s have been simulated using atomistic classical molecular dynamics to understand their structure-property relationships and time-evolution of local atomic processes \cite{Schuh2007,Cheng2008}, and local atomic \gls{sro} and \gls{mro} \cite{Sheng2006}. In the current chapter, the fundamentals of the classical molecular dynamics method, as well as techniques used to characterize the simulated samples are discussed. \par
+
+\section{Molecular Dynamics Simulations} \label{s:md}
+\subsection{Overview}
+The many-body approach is adopted to describe the mechanisms of a system of atoms or molecules. The most accurate solution would be achieved with a quantum mechanical treatment. However, beyond a two-body problem, an analytic quantum mechanics solution is not possible. While the local density approximation class of \gls{dft} methods can help predict structure and thermodynamics, they are highly computationally intensive; one is limited to systems of not more than hundreds of atoms for the simulations to complete in a reasonable time with the computing resources available today \cite{Burke2012}. A reasonable compromise is to perform \gls{md} simulations by treating atoms as the lowest level of discretization to study the properties of materials. Today, \gls{md} simulations of metallic glasses are performed using readily available codes such as \gls{lmp} \cite{Plimpton1995,Thompson2022}. The basics of the techniques implemented in the \gls{md} solvers are addressed.  \par 
+
+The Born–Oppenheimer approximation \cite{Born1927}, allows one to treat the dynamics of the nuclei and electrons of atoms separately due to their large mass differences. Consequently, in the many-body problem, the heavier and slowly moving nuclei are described as point masses using Newton's equations of motion. The electrons are assumed to adapt instantaneously to change in the nuclei. For studies in which one is interested in atomic arrangements and interactions, the atomistic molecular dynamics methods allows discretization of simulation to atomic scales \footnote{Further approximations, such as coarse-graining: where certain molecules or functional groups are treated as one unit, or implicit solvent models: where the solvent interactions in a solute-solvent system are implicit in the equations of motion, are also employed to further reduce simulation costs.}. Being able to calculate both the particle velocities and trajectories, \gls{md} emerges a powerful tool to not only observe microscopic processes, but also compute macroscopic experimental observables of a given system. \par
+
+For a system of N-particles of masses $\{m_i\}$ with a set of initial positions $\{ \vec{r_i} \}$ and momenta $\{ \vec{p_i} \}$, the time evolution of the system can be obtained by solving for the Newton's equation of motion:
+\begin{equation} \label{e:eqm}
+\vec{F_i} = m_i \frac{\partial^2 \vec{r_i}}{\partial t^2}, \text{ i=1...N}
+\end{equation}
+
+The forces $\vec{F_i}$ on the particles are obtained from the gradient of a potential V($\{r_j\}$)
+ \begin{equation} \label{e:fpote}
+\vec{F_i} = -\vec{\nabla} V_i (\{r_j\}), \text{ i,j=1...N}.
+\end{equation}
+
+The mathematical function for V($\{r_j\}$ is decided based on the type of interatomic interactions being modeled. The equations of motions are then time-integrated over short time steps $\delta t$. The aspects of the potentials and the technique of performing the time-integration are discussed in the following sections.
+
+\subsection{Interatomic Potentials} \label{s:ffs}
+As seen from Equations~\ref{e:eqm}~and~\ref{e:fpote}, the time-evolution of the system in \gls{md} are crucially dependant on the interatomic potentials (also called force-fields). Different mathematical functions have been prescribed to describe the various physical interactions. The simplest kind of interatomic potential is the \gls{lj} potential and it is a pair potential taking the following form:
+
+\begin{equation} \label{e:lj}
+		U_{ij}(r_{ij}) = 4 \epsilon \left[\left(\frac{\sigma}{r_{ij}}\right)^{12} -\left(\frac{\sigma}{r_{ij}}\right)^{6}\right],
+\end{equation}
+
+where $U_{ij}$ is the interatomic potential between the i$^{th}$ and j$^{th}$ atoms, $r_{ij}$ is the distance between the particles, $\epsilon$ is the strength of the potential, and $\sigma$ is the distance between the two particles at which the potential energy between them is zero \cite{Lee2016}. The \gls{lj} potentials models the interatomic forces in a simple fashion: The first term, contributing energy to the system replicated the close-range repulsions. The second term contributes to the attractive forces. The balance between the two terms results in the binding of atoms. This definition of an interatomic potential was adopted for supercooled liquids \cite{Kob1995}, and it still used as a model system for glass simulations \cite{Danilov2016}. \par
+
+However, such a pair potential does not include the many-body effects that occur in metallic systems. \textcite{Daw1993}, in 1993, elaborate on the limitations of the pair potential and a solution for it. In metals, bonds between atoms are not independent of each other. Consequently, the pair potentials do not replicate metallic bonding because the \glsdesc{ecoh} \gls{ecoh}() does not scale with negative of \glsdesc{z} (\gls{z}), which is the expected result from pair potential. Rather, \gls{ecoh} scales more weakly as $E_{coh} \propto Z^{1/2}$ \cite{Daw1993}. \par
+
+To overcome the limitations discussed above, and to capture many-body interactions in metallic solids, the \gls{eam} model was proposed by \textcite{Daw1983}. This model takes into consideration the realistic forces on a central atom resulting from the sea of electrons from the atoms that the central atom is embedded in. Each atom is considered as an impurity in the host of the other atoms. Now, the \gls{eam} potential U$_{EAM}$ takes the following form:
+
+\begin{equation} \label{e:eam}
+ 	U_{EAM} = \sum_{i} \mathcal{F}_{i}(\rho_{i}) + \sum_{i \neq j} \phi_{ij}(r_{ij})  %F \left( \sum_{i \neq j} \rho_{} \right)
+\end{equation}
+
+where $\mathbb{F}_i$ is the embedding energy functional, $ \rho_{i}$ is the average electron density of the i$^{th}$ atom, $\phi_{ij} $ is a short-range electrostatic interaction, and $ r_{ij} $ is the scalar distance between the i and j atoms. The general form of the functional $\mathcal{F}$ and $\phi$ are not known, but are fitted to replicate elastic properties known from experiments.\par  
+
+The \gls{eam} interatomic potential used in this thesis was developed by \textcite{Mendelev2009,Mendelev2019}. The potential form used was of a Finnis–Sinclair-type: which differs only slightly from the original Daw and Baskes \cite{Daw1983,Daw1993} formalism in that the electron density $\rho_{i}$ is element dependant. These interatomic potentials are semi-empirically derived; the Cu-Zr potential utilised in this thesis \cite{Mendelev2019} was developed from pure Cu and Zr potentials, modifying the $\rho_{i}$ to fit to the experimental liquid density, mixing enthalpy, and \gls{rdf} \cite{Mendelev2009} (Information on \gls{rdf} is given in Section~\ref{s:rdf}). \par 
+
+Later, the CuZr \gls{eam} potential was improved to predict the Laves phases better by fitting the  \gls{eam} \gls{prdf} to those from experiments and \textit{ab-initio} \gls{md} simulations. Only the terms associated with Cu-Zr interactions were modified; the Cu-Cu and Zr-Zr interactions remained unchanged \cite{Mendelev2019}. Such semi-empirical potentials are system specific and provide reasonably accurate results for large system sizes. \par 
+
+Although the \gls{eam} interatomic potential has a complicated form, at the time of calculating the forces, one only needs the tabulated values of $\mathcal{F}$, $\rho$ and $\phi$ to calculate $U_{EAM}$ and $\vec{F_i}$ from Equations~\ref{e:eam}~and~\ref{e:fpote} respectively. The final expression for $U_{EAM}$ bears resemblance to a pair-wise calculation, leading to the \gls{eam} potentials being often mistaken to be similar to classical potentials like the \gls{lj} model. Owing to the additional calculation of the embedding forces, the \gls{eam} potentials are not only more accurate, but are also computationally expensive than the \gls{lj} potentials. \par
+
+\subsection{Periodic Boundary Conditions and Pair Cutoffs}
+Simulations are usually carried out in a cubic or cuboid simulation box, which is a virtual space in which the particles exist. A \gls{2d} simulation box is depicted in Figure~\ref{f:pbc}. While \gls{md} techniques can simulate millions of atoms in today's supercomputers, the number is still quite small in comparison to realistic systems where the particle numbers are in the orders of the Avogadro's number ($6.022 \times 10^{23}$). For this reason, any edge effects or surface effects observed in simulations will be significantly larger than observed in the experiments. \par
+
+\begin{figure}[!h]
+	\includegraphics[width=\linewidth]{pbc.png}
+	\mycaption{Simulation Box and Periodic Boundary Conditions}{(a) A simulation box and eight of its infinite images are depicted, atoms moving across the boundary can be mapped back within the original box as well. (b) The atoms in the simulation box are partitioned into grids, which can be assigned to independent processors for parallel computing. Ghost atoms of the central grid, associated with the highlighted central atom are also depicted.}
+	\label{f:pbc}
+\end{figure}
+
+In order to circumvent this problem, \gls{pbc} are used, instead of closed boundaries. The periodic boundaries are visualized in Figure~\ref{f:pbc}.: the simulation box is connected across boundaries such that any atoms that exits the simulation box on side side, enters from the opposite side while maintaining the same trajectory. \footnote{An unacquainted reader can draw parallels from the Pac-Man arcade game, in the way that Pac-Man and the ghosts traverse across the edge of the maze, only to appear on the other side.} Additionally, a minimum-image convection \cite{Frenkel1997,Lee2016}, for each atom that crosses the boundary in either of the \textbf{$\hat{i}$}, \textbf{$\hat{j}$} and \textbf{$\hat{k}$} directions, an ``image" flag is assigned to each atom. Forces on a particle are calculated with the nearest images of the other particles. Even with periodic boundary conditions, the number of atoms in the system should be large enough, to avoid any finite-size effects. \par
+
+In \gls{md} simulations, forces acting on every atom need to be calculated, and subsequently the computation times scale as \On{N^2} with the number of particles N in the N-body system. To improve simulation efficiency, short-range interactions between particles are truncated within cut-off distances (See Figure~\ref{f:pbc}b). For long-range interactions such as Coloumbic forces, a technique called Ewald summation is used to approximate the long-range forces (forces which decay slower than $r^{-3}$) as well allowing the simulations to scale as \On{N^{3/2}} or \On{Nlog(N)} \cite{Lee2016,Frenkel1997}. \par
+
+Furthermore, defining a cut-off radius also allows one to divide a simulation box into multiple grids (See Figure~\ref{f:pbc}b), which allows for the \gls{md} solvers to be run in parallel on multiple processors \cite{Thompson2022}. Each grid of the simulation box is assigned to a single processor. The atoms within a grid, and associated ``ghost" atoms---which are atoms outside the given grid but within the cut-off distances of the atoms inside---exist within the memory of the processor. In this way, the interactions of an N-body simulations can be computed independently within each processor grid. \par
+
+\subsection{Time Integrators}
+In an \gls{md} simulations box that was discussed in the previous section, the intial coordinates and even velocities of the particles can be defined. However, to get information on the time evolution of the system, the equations of motion---typically described by the Newtonian formalism---still need to be numerically time-integrated. Based on an algorithm first proposed by \textcite{Verlet1967}, the modified Velocity-Verlet algorithm \cite{Swope1982} is the standard technique to perform time integration in \gls{md} \footnote{Some alternatives like r-RESPA, Runge-Kutta methods also exist but are out of the scope of this thesis.}. At a given time t, the position of an i$^{th}$  particle $\vec{r}_i$ in  the time intervals $t \pm \delta t$ can be expressed as a Taylor expansion:
+
+\begin{equation} \label{e:verini}
+\begin{gathered}
+	\vec{r}_i(t+\delta t) = \vec{r}_i(t) + \vec{v}_i(t)\delta t + \frac{\vec{F}_i(t)}{2m_i}\delta t^2 + \dddot{\vec{r}_i}(t) \frac{\delta t^3}{3!} + \mathcal{O}(\delta t ^4) \\
+	\vec{r}_i(t-\delta t) = \vec{r}_i(t) - \vec{v}_i(t)\delta t + \frac{\vec{F}_i(t)}{2m_i}\delta t^2 - \dddot{\vec{r}_i}(t) \frac{\delta t^3}{3!} + \mathcal{O}(\delta t ^4) 
+\end{gathered}
+\end{equation}
+
+Where $\vec{F}_i$, $\vec{v}_i$ and m$_i$ are the force, velocity, and mass of the i$^{th}$ particle respectively. Adding and subtracting the two Equations~\ref{e:verini}, one gets:
+\begin{equation}
+\vec{r}_i(t+\delta t) + \vec{r}_i(t-\delta t) = 2 \left(\vec{r}_i(t) + \frac{\vec{F}_i(t)}{2m_i}\delta t^2 + \mathcal{O}(\delta t ^4) \right)
+\end{equation}
+
+\begin{equation}
+\vec{r}_i(t+\delta t) - \vec{r}_i(t-\delta t) = 2 \left(\vec{v}_i(t)\delta t + \dddot{\vec{r}_i}(t) \frac{\delta t^3}{3!}  \right)
+\end{equation}
+
+These two equations, have been approximated to give the following relation:
+\begin{equation} \label{e:rvelver}
+\vec{r}_i(t+\delta t) \approx \vec{r}_i(t) + \vec{v}_i(t)\delta t + \frac{\vec{F}_i(t)}{2m}\delta t^2 +\mathcal{O}(\delta t ^3)  % \dddot{\vec{r}}(t) \frac{\delta t^3}{3!} + \mathcal{O}(\delta t ^4)
+\end{equation}
+For a more detailed treatment, the reader is referred to References \cite{Frenkel1997,Lee2016}.
+
+Similarly, an expression for velocities is obtained:
+\begin{equation} \label{e:vvelver}
+\vec{v}_i(t+\delta t) = \vec{v}_i(t) + \frac{\vec{a}_i(t) + \vec{a}_i(t+\delta t)}{2}\delta t
+\end{equation}
+
+Where $\vec{a}_i$ denotes the acceleration. With the Equations~\ref{e:rvelver}~and~\ref{e:vvelver}, the Velocity-Verlet algorithm can finally be described:
+
+\begin{itemize}[noitemsep]
+\item Get intital coordinates
+\item Calculate new position $\vec{r}_i(t+\delta t)$ using Equation~\ref{e:rvelver}, and computing forces, or $\vec{a}(t)$
+\item At t=$\delta t/2$, calculate intermediate velocity \begin{equation} \vec{v}_i(t+\delta t/2) = \vec{v}_i(t) + \frac{1}{2}\vec{a}_i \delta t \end{equation}
+\item Using $\vec{r}_i(t+\delta t)$, compute acceleration $\vec{a}_i(t+\delta t)$
+\item Calculate new velocity $\vec{v}_i(t+\delta t)$ \begin{equation} \vec{v}_i(t+\delta) = \vec{v}_i(t+\delta t/2) + \frac{1}{2}\vec{a}_i(t+\delta t) \delta t \end{equation}
+\end{itemize}
+
+As seen above, the time integration can be started with just the initial coordinates and velocities. Furthermore, the Velocity-verlet algorithm allows for calculation of forces just once per time step. The error in estimating $\vec{r}_i(t+\delta t)$ is of order \On{t^3}. The error dies down exponentially with the time of the simulation, this effect is termed as Lyapunov instability \cite{Frenkel1997}. This error loses significance at long simulation time scales. \par
+
+The shorter the length of the timestep, the higher the accuracy. However, a longer timestep results in lesser calculations and consequently is less computationally expensive. For this reason, the choice of the timestep is quite important. For \gls{mg} simulations with the \gls{eam} potential, usually a timestep of is 1 \gls{fs}. A good timestep should be at least less than half the timescale of the fastest vibration in the system, by the Nyquist theorem \cite{Shannon1949}.
+
+
+\subsection{Thermostats and Barostats}
+Once a system has been assigned initial coordinates, and velocities, the \gls{md} simulation can be run as an isolated system or a microcanonical ensemble. To simulate the system at a specific temperature, or to avoid accumulation of numerical errors over time, temperature control is required, and it is done by implementing thermostat algorithms. \par
+
+The simplest form of temperature control in \gls{md} can be done by harnessing the equipartition theorem. The average kinetic energy ($\langle E_{kin} \rangle $) and temperature (T) are associated by the following relation, for a system with 3 degrees of freedom:
+
+\begin{equation}
+\langle E_{kin} \rangle = \frac{1}{2} \langle \sum_{i} m_i \vec{v_i}^2 \rangle = \frac{3}{2} k_B T
+\end{equation}
+
+where m$_i$ and $\vec{v_i}^2$ are the mass and velocity of the i$^{th}$ particle respectively. Knowing this, temperature control can be achieved by simple scaling of velocities. Multiplying velocities by a certain factor can change the temperature of system. This, however, only sets the temperature but does not replicate behaviour of a closed system, or a canonical ensemble. In this thesis, a Nos\'e-Hoover thermostat \cite{Hoover1985} is implemented as thermostat to create an isothermal ensemble. The Nos\'e-Hoover thermostat couples the system with an infinite heat bath, and a fictitious mass (or coupling strength) that indicates how quickly the system's temperature can be set to the target temperature. \par
+ 
+Similarly, the pressure of a \gls{md} system can also be controlled to then simulate constant or varying pressures. Such an algorithm is referred to as a barostat. The chosen barostat in this thesis is the \textcite{Parrinello1980} implementation, which introduces a time-dependent metric tensor, in additional to introducing volume as a thermodynamic variable. In the \gls{lmp} code, the barostat can be coupled with the Nos\'e–Hoover thermostat to approximately simulate an isoenthalpic-isobaric ensemble. \par
+
+\section{Characterization}
+The previous section describes the fundamentals of the \gls{md} techniques. The implementation of \gls{md} to simulate the \gls{rq} \gls{mg}s, \gls{ng}, and \gls{camg}, will be discussed in Chapter~\ref{c:dev}. The novel properties of \gls{ng}s and \gls{camg}s are then evaluated in Chapters~\ref{c:camg}~and~\ref{c:cbmg}. \par
+
+In order to aid the development of \gls{camg} simulation protocols, and to unravel the exciting properties of \gls{camg}s, all glasses simulated in this dissertation are characterized based on their structural and energetic features. \par %Being that the systems of our interest are amorphous in nature, they are structurally characterized by their atomic pair-correlations, and their \gls{sro} and \gls{mro}. Additionally, the \gls{camg}s are evaluated by \par
+
+\subsection{Radial Distribution Function} \label{s:rdf}
+In amorphous materials, which do not possess Long-range Order, the \gls{rdf}---or the pair correlation function---is to describe atomic structures. The \gls{rdf} usually is denoted as g(r), and is defined as the average probablility of finding a neighbouring atom within a spherical shell $dr$ at distance $r$ of a given atom. Mathematically, the number of particles in the shell around an atom can be expressed as:
+
+\begin{equation}
+dn(r) = \frac{N}{V} g(r) 4\pi r^2dr
+\end{equation}
+Where, N is the total number of particles, and V is the volume occupied by the system. From the above equation, the expression of g(r) around a single atom is derived:
+\begin{equation}
+g(r) = \frac{V}{N} \frac{dn(r)}{4 \pi r^{2}dr}
+\end{equation}
+
+In the case of a two-component system where $\alpha$ and $\beta$ are the two species, the \gls{prdf} of the $\alpha$ species with neighbouring atoms of $\beta$ species is written as: 
+\begin{equation}
+g_{\alpha \beta}(r) = \frac{V}{N_\alpha} \frac{dn_{\alpha \beta}(r)}{4 \pi r^{2}dr}
+\end{equation}
+
+Integrating the \gls{rdf} $g(r)$ function within a shell of r$_0$ gives coordination number in the shell---which is the number of neighbours inside a coordination sphere. In \gls{lmp}, the g(r) is calculated as a histogram: by binning pairwise distances of all atoms within an \gls{md} pair cutoff value. \par
+
+\begin{figure}[h]
+	\begin{subfigure}{0.5\textwidth} \centering
+		\includegraphics[height=4.5cm,trim={3cm 1.25cm 3cm 1.25cm},clip]{2dmelt.png}
+		\subcaption{}
+	\end{subfigure}%
+	\hfill
+	\begin{subfigure}{0.5\textwidth} \centering
+		\includegraphics[height=5.5cm]{rdf-lj.png}
+		\subcaption{}
+	\end{subfigure}%
+	\mycaption{RDF of a 2D LJ Melt}{(a) A simulation snapshot of a \gls{2d} LJ melt using \gls{ovito} (b) The \gls{rdf} of the liquid.}
+	\label{f:ljrdf}
+\end{figure}
+
+Figure~\ref{f:ljrdf}a visualizes a simulated 2 dimensional \gls{lj} melt with \gls{pbc}. In Figure~\ref{f:ljrdf}b, the corresponding \gls{rdf} is described. One way to interpret the $g(r)$ is as an indication of the local density. At the length scale of the order of atomic radii, the local density ($\rho (r)$) is a modulated function of average density ($\rho_{bulk}$). \begin{equation} \rho (r) = \rho_{bulk} \cdot g(r) \end{equation}
+Supposing the system simulated in Figure~\ref{f:ljrdf} was a crystalline material, then RDF would have looked a series of peaks, each n$^{th}$ peak corresponding to the position of the n$^{th}$ nearest neighbour. However, since it is a liquid, and lacking long-range order, the peaks that would have been seen in crystalline materials broaden and show the average \gls{sro} and \gls{mro}. The first peak of g(r) (1.2 LJ distance units in Figure~\ref{f:ljrdf}) is the first nearest-neighbour distance. At large values of r, the probability of finding a nearest neighbor within the shell of radius r is a sure event. Hence, $g(r)\rightarrow 1$ for such large r values, and $ \rho (r) \rightarrow \rho_{bulk} $, as seen in Figure~\ref{f:ljrdf}b. \par 
+
+Since the \gls{rdf} is a projection of the positions of nearest neighbours onto a radius space, it can give the average information of the bonding. It can not give a full description of the local atomic order. \par
+
+%\url{http://isaacs.sourceforge.net/phys/rdfs.html} \\
+%\url{http://rkt.chem.ox.ac.uk/lectures/liqsolns/liquids.html} \\
+%\url{https://en.wikibooks.org/wiki/Molecular_Simulation}
+%%https://en.wikibooks.org/wiki/Molecular_Simulation/Radial_Distribution_Functions
+
+
+
+\subsection{Voronoi Analysis} \label{s:voronoi}
+The Voronoi Tesselation method is used to partition space into mutually exclusive volumes around a finite set of points in space. While applied to metallic glasses, it can assign a finite volume---a polyhedron---to each atom in a simulation. In doing so, one can described the local orders and topology of the simulated amorphous structures. The three dimensional Voronoi polyhedra in the present thesis were determined using the methods described by \textcite{Brostow1978,Brostow1998} and \textcite{Borodin1999} and implemented on \gls{ovito} \cite{Stukowski2010a}. \par
+
+\begin{figure}[h] \centering
+	\includegraphics[width=0.4\textwidth,trim={1.8cm 0.5cm 1.2cm 0.8cm},clip]{voronoi-lj.png}
+	\mycaption{Voronoi Tesselation of a \gls{2d} LJ Melt}{\gls{2d} Voronoi polygons constructed for the \gls{2d} LJ melt shown in Figure~\ref{f:ljrdf}a using Python and the \href{https://freud.readthedocs.io/en/latest/gettingstarted/examples.html}{\textit{freud}} Python library.}
+	\label{f:ljvoro}
+\end{figure}
+
+The \gls{vp} are constructed as the shapes that are bound by intersecting planes perpendicular to lines connecting every atom pair. This method is reminiscent of the Wigner-Seitz construction of primitive cells in solid-state physics \cite{Kittel2004}. The representation of Voronoi tesselation in \gls{2d} is shown in Figure~\ref{f:ljvoro}. For 3 dimensional systems, the polyhedra are described by the Sch\"afli notation \cite{Coxeter1973}: \vi{n$_3$}{n$_4$}{n$_5$}{n$_6$}, where n$_i$ are the number of i-edged faces of the polyhedra \cite{Coxeter1973,Brostow1998}. The choices of the polyhedra is not artibrary, rather they are restricted by two constraints: 1. total number of edges is equal to \gls{z} of the central atom. 2. the Volyhedra satisfy the relation $\sum _i (6-i)n_i = 0$, known as the Euler relation \cite{Finney1970}. The \vi{n$_3$}{n$_4$}{n$_5$}{n$_6$}  Sch\"afli restricted for n$_i$, where $3 \leq i \leq 6$. This is because polyhedra cannot have faces with less than three edges, and because coordinates with edges of sizes four to six dominate dense packed structures \cite{Borodin1999}. \par
+
+\begin{figure}
+	%\begin{subfigure}{\textwidth}
+	\begin{subfigure}{0.33\textwidth}	 \centering		\includegraphics[width=0.7\textwidth]{sc_bonds} 
+		\subcaption{Nearest neighbours} \end{subfigure}%
+	\hfill
+	\begin{subfigure}{0.33\textwidth}	\centering  	\includegraphics[width=0.7\textwidth]{sc_coord}
+	\subcaption{Coordination polyhedron} \end{subfigure}%
+	\hfill
+	\begin{subfigure}{0.33\textwidth}	\centering  	 \includegraphics[width=0.7\textwidth]{sc_voronoi} 
+		\subcaption{Voronoi polyheron}  \end{subfigure}%
+	\mycaption{Voronoi Polyhedra for an SC coordination}{For a (a) simple cubic coordination, the corresponding (b) coordination polyhedra and (c) Voronoi polyhedra are shown. The volumes of the polyhedra and the bonds are not drawn to scale.}
+	\label{f:voronoi-sch}
+\end{figure}
+
+In Figure~\ref{f:voronoi-sch}a, a \gls{sc} coordination is depicted as an example. The central atom is surrounded by six nearest neighbours. Figure~\ref{f:voronoi-sch}b depicts the corresponding coordination polyhedron. The corresponding \gls{vp} (Figure~\ref{f:voronoi-sch}a) is equivalent to the coordination polyhedron, with the total number of faces in a \gls{vp} being the same as the number of vertices in the coordination polyhedron. The \gls{vp} has six sides with four faces each, and hence it's Sch\"afli index would be \vi{0}{6}{0}{0}. The indices add up to six, viz. the coordination number of the central atom. \par
+
+For metallic glasses in general, the Voronoi polyhedra are known to be classified into four main categories as reported by \textcite{Yue2018}: 1. icosahedral-like: \vi{0}{0}{12}{0}, \vi{0}{0}{10}{x}, and \vi{0}{2}{8}{x}; 2. crystal-like: \vi{0}{4}{4}{x} and \vi{0}{5}{2}{x}; 3. mixed coordinations: \vi{0}{3}{6}{x}, where 0 $\leq$ x $\leq$ 4; and 4. other remaining indices. \par
+
+
+\subsection{Surface Mesh} \label{s:surmesh}
+The open surfaces of the simulated samples need to be identified in order to evaluate porosity in \gls{ng}s and \gls{camg}s, and to compute the volumes enclosed by the \gls{camg}s. In the current dissertation, this is done by means of constructing a surface mesh, by the alpha-shape algorithm \cite{Stukowski2014} implemented in \gls{ovito}. The algorithm utilizes a method similar to Voronoi tesselation called the Delaunay triangulation, that connects every three nearest neighbouring atoms as vertices of a triangle. Then, a ``probe sphere" is determined, which defines the smoothness of the surface mesh. The circumcirles of the constructed triangles are compares with the probe sphere. If the radius is smaller than that of the circumcircle, the surface is determined to be closed. If larger, then the surface is considered to be open. The alpha-shape method takes care of the \gls{pbc}.
+
+\subsection{Local Atomic Strain} \label{s:vonMises}
+The local shear strain or the von Mises Shear Strain, has been traditionally used as a model to explain failure theories in metallic materials, and for the visualization of shear transformations in metallic glasses. One of the aims of this dissertation is to identify the interfaces formed amongst clusters, in which atoms are sheared due to either compaction in \gls{ng}s, or deposition in \gls{camg}s.  \par
+
+To calculate the local deformations, two system configurations are required: one being the sample to be characterized, and the second being an initial undeformed reference configuration. Using these, the von Mises shear strain is calculated by an algorithm proposed by \textcite{Shimizu2007}: from the two configurations, a local atomic deformation gradient tensor (or a transformation tensor) is determined, from with the strain tensor is calculated. The invariant of the strain tensor is the von Mises local shear strain, and is given by the following expression:
+
+\begin{equation}
+\eta_i ^{Mises} = \sqrt{\eta_{yz}^2 + \eta_{xz}^2 + \eta_{xy}^2 + \frac{1}{6} \left[ \left(\eta_{yy} - \eta_{zz}\right)^2 + \left(\eta_{xx} - \eta_{zz}\right)^2 + \left(\eta_{xx} - \eta_{yy}\right)^2 \right]}
+\end{equation}
+
+where, $\eta_i$ is the strain tensor for each i$^{th}$ atom. The von Mises strain was calculated and visualized using the \gls{ovito} software.
+
+%\subsection{Thermal Stability}
+%Annealing by giving a thermal ramp, and equilibrating at intermediate steps
+%Enthalpy measured as $H = U + \Delta (PV)$
+%
+%\begin{equation} C_p = \left( \frac{\partial H}{\partial T} \right)_p	\end{equation}
+%Heat Capacity Fitting with a sum of a sigmoid and a Gaussian peak
+%\begin{equation}
+%\tilde{C}(T) = C_s + \frac{\Delta C}{2} \left(1 + erf\left(\frac{T-T_s}{\sqrt{2\sigma^2_s}} \right) \right) + \frac{\Delta H}{\sigma_p \sqrt{2\pi}} \left(exp\left(-\frac{(T-T_p)^2}{\sqrt{2\sigma^2_p}} \right) \right)
+%\end{equation}
+%where $C_s$ , $\Delta C$, $T_s$, $\sigma_s$, $T_p$, $\sigma_p$
+%Onset temperature $T_R$
+
+\clearpage
+\section{Synopsis}
+This chapter discusses the fundamentals of the \gls{md} technique, which was used to simulate the glassy systems in this dissertation. The simulations were run using the \gls{lmp} code on the \gls{fh2} and \gls{hrk} \gls{hpc} clusters available through the \gls{kit}. The \gls{mpi} protocol using MPICH2 was implemented to perform parallel programming. Furthermore, some characterization techniques such as \gls{rdf}, Voronoi Tesselation and the von Mises local shear strain---used to evaluate the simulated data sets---were elucidated. The characterization was done predominantly using Python scripts, and the \gls{ovito} Python library. \par
+
+The iterative workflow for the development of the simulations and the software involved, are described in the \nameref{c:supple} Section, Figure~\ref{f:workflow}. The simulation codes developed in the framework of this thesis, and the necessary post-processing scripts can be accessed in Section~\ref{s:github}, also in the \nameref{c:supple}. The concepts addressed in this chapter will be implemented in Chapters~\ref{c:camg}~and~\ref{c:cbmg} to simulate and characterize \gls{camg}s and \gls{ng}s.

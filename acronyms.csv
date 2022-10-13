@@ -1,0 +1,67 @@
+3d,D,three-dimensional
+pas,PAS,positron annihilation spectroscopy
+ihp,IHP,Inverse Hall-Petch
+abc,ABC,Autonomous basin climbing
+art,ART,activation-relaxation technique
+mc,MC,Monte Carlo
+2d,2D,two-dimensional
+icb,ICB,ionized cluster beam 
+qna,QNA,quasi-nearest atom
+tem,TEM,transmission electron microscopy
+camg,CAMG,cluster-assembled metallic glass
+cam,CAMs,cluster-assembled materials
+cbmg,CBMG,cluster-based metallic glasses
+ng,NG,nanoglass
+mg,MG,metallic glass
+gfa,GFA,glass-forming ability
+rdf,RDF,radial distribution function
+prdf,PRDF,partial radial distribution function
+cibd,CIBD,cluster-ion beam deposition
+ilo,ILO,icosahedral-like order
+ilike,ICO-like,icosahedral-like
+fi,FI,full-icosahedral
+hcp,HCP,hexagonal close-packed
+eam,EAM,embedded atom model
+md,MD,molecular dynamics
+igc,IGC,inert-gas condensation
+exafs,EXAFS,extended X-ray absorption fine structure
+xanes,XANES,X-ray absorption near edge structure
+sro,SRO,short-range order
+mro,MRO,medium-range order
+pel,PEL,potential-energy landscape
+uhv,UHV,ultra-high vacuum
+pvd,PVD,physical-vapor deposition
+mght,MG\_ht,heat-treated metallic glass
+int,INT,Institute of Nanotechnology
+kit,KIT,Karlsruhe Institute of Technology
+lmp,LAMMPS,large-scale atomic/molecular massively parallel simulator
+rq,RQ,rapidly-quenched
+pbc,PBC,periodic boundary conditions
+ovito,OVITO,open visualization tool
+dft,DFT,density functional theory
+lj,LJ,Lennard-Jones
+hpc,HPC,high-performance computing
+mpi,MPI,message passing interface
+pe,P.E.,potential energy
+sc,SC,simple cubic
+vp,VP,Voronoi polyhedra
+fh2,ForHLR II,Forschungshochleistungs-rechners 
+hrk,HoreKa,Hochleistungsrechner Karlsruhe
+lro,LRO,long-range order
+bmg,BMG,bulk metallic glasses
+fcc,FCC,face-centered cubic
+ecp,ECP,efficient cluster packing
+ncm,NCM,nanocrystalline materials
+xrd,XRD,X-ray diffraction
+qs,QS,quadrupole splitting
+ms,MS,M\"ossbauer spectroscopy
+stz,STZ,shear transformation zones
+apt,APT,atom-probe tomography
+tof,TOF-MS,time of flight mass spectrometry
+rmc,RMC,reverse monte carlo
+gum,GUM,geometrically-unfavored motifs
+zfc,ZFC,zero-field cooled
+fc,FC,field cooled
+edx,EDX,energy-dispersive X-ray spectroscopy
+xas,XAS,X-ray absorption spectroscopy
+bm,BM,ball-milling

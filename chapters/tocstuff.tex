@@ -1,0 +1,28 @@
+\todototoc
+\listoftodos
+
+\myemptypage
+\phantomsection
+\chapter*{Table of Contents}
+\cftsetindents{figure}{0em}{3em} %table of contents indentation figure, gap b/w number and title
+\cftsetindents{table}{0em}{3em} %table of contents indentation tables
+\addcontentsline{toc}{chapter}{Table of Contents}
+%\addcontentsline{toc}{section}{Contents}
+% Move the listof...'s one level down from chapter to section:
+\begingroup
+	\let\chapter=\section
+	\let\addchap=\addsec
+	\tableofcontents
+	~\clearpage% or \newpage?! in order to get the correct page number listed in TOC
+	\phantomsection
+	\addcontentsline{toc}{section}{List of Figures}
+	\listoffigures
+	%	\clearpage
+	\addcontentsline{toc}{section}{List of Tables}
+	\listoftables
+\endgroup
+
+{\linespread{1}
+\printglossary[type=\acronymtype,nonumberlist] %\printglossary[nonumberlist]
+}
+\addcontentsline{toc}{chapter}{Glossary}
