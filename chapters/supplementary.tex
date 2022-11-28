@@ -5,62 +5,44 @@
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=0.7\textwidth]{workflow.png}
-	\mycaption{Simulation Development Process}{The \gls{md} \gls{hpc} workflows were developed in a iterative fashion as illustrated.}
+	\mycaption{Simulation development process}{The \gls{md} \gls{hpc} workflows were developed in a iterative fashion as illustrated.}
 	\label{f:workflow}
 \end{figure}
 
 \clearpage
 \section{Simulation Repository} \label{s:github}
-The simulation repositories can be accessed via the following Github links:
-\begin{itemize}[noitemsep]
-	\item Simulations + post-processing: \todo{Move code repository to public Github and add link here}
-	\item Comparative data-processing pipelines:
-\end{itemize}
-
 \begin{figure}[!h] \centering
 	\includegraphics[width=\textwidth]{codeflow.png}
-	\mycaption{Simulation Repository Flowchart}{The various LAMMPS based semi-automated \gls{md} simulation workflows, and python data processing scripts developed for this thesis are depicted.}
+	\mycaption{Simulation repository flowchart}{The various \gls{lmp} based semi-automated \gls{md} simulation workflows, and python data processing scripts developed for this thesis are depicted.}
 \end{figure}
+
+The simulation repositories can be accessed via the following Github links:
+\begin{itemize}[noitemsep]
+	\item Simulations + post-processing:\\ \url{https://github.com/syamalpraneeth/camg-simulations}
+	\item Comparative data-processing pipelines:\\ \url{https://github.com/syamalpraneeth/camg-analysis}
+\end{itemize}
 
 \clearpage
 \section{Quenching of RQ MGs} \label{s:mgsquench}
 \begin{figure}[!h]
 	\centering
-%	\begin{subfigure}{\textwidth} \centering
-		\begin{subfigure}{0.42\textwidth} \centering %\renewcommand\thesubfigure{\alph{subfigure}1}
+		\begin{subfigure}{0.42\textwidth} \centering 
 			\includegraphics[width=\textwidth,trim={0 0.8cm 0 0.2cm},clip]{50-50/post/enthalpy_2} \caption{}
 		\end{subfigure}%
     	\hspace{0.2cm}
-		\begin{subfigure}{0.42\textwidth} \centering %\renewcommand\thesubfigure{\alph{subfigure}2} 	\addtocounter{subfigure}{-1}
+		\begin{subfigure}{0.42\textwidth} \centering 
 			\includegraphics[width=\textwidth,trim={0 0.8cm 0 0.2cm},clip]{50-50/post_8000/enthalpy_8000} \caption{}
 		\end{subfigure}%
 		\vfill
-		\begin{subfigure}{0.42\textwidth} \centering  %\renewcommand\thesubfigure{\alph{subfigure}3} \addtocounter{subfigure}{-1}
+		\begin{subfigure}{0.42\textwidth} \centering  
 			\includegraphics[width=\textwidth,trim={0 0.8cm 0 0.2cm},clip]{50-50/post_8000m/enthalpy_8000m} \caption{}
 		\end{subfigure}
-%		\addtocounter{subfigure}{-1}
-%		\subcaption{Enthalpy vs Temperature: Varying RQ MG Preparation}
-	\mycaption{Enthalpy vs Quench Rate for \cz RQ MGs}{Enthalpy ovolution is recording while changing quenching simulation processes. (a) Simulated as performed as discussed in Section~\ref{s:simtestMG}, (b) simulation starting with $\sim$8000 atoms at 2000 K, and (c) $\sim$8000 atoms melted from 50 K before quenching.}
+	\mycaption{Enthalpy vs quench rate for \cz RQ MGs}{Enthalpy evolution is recording while changing quenching simulation processes. (a) Simulated as performed as discussed in Section~\ref{s:simtestMG}, (b) simulation starting with $\sim$8000 atoms at 2000 K, and (c) $\sim$8000 atoms melted from 50 K before quenching.}
 	\label{f:enth_quench}
 \end{figure}
 
-\clearpage
+%\clearpage
 \section{Cluster Synthesis} \label{s:clussynth}
-%\begin{figure}[!h]
-%	\begin{subfigure}{\textwidth} 	\centering
-%	\includegraphics[width=0.5\textwidth]{3nm/50-50/heat-spike/post/comp_3nm.png}
-%	\end{subfigure}%
-%	\vfill
-%	\begin{subfigure}{0.5\textwidth} 	\centering
-%	\includegraphics[width=\textwidth]{3nm/50-50/heat-spike/post/comp-cu_3nm.png}
-%	\end{subfigure}%
-%	\hfill
-%	\begin{subfigure}{0.5\textwidth} 	\centering
-%	\includegraphics[width=\textwidth]{3nm/50-50/heat-spike/post/comp-zr_3nm.png}
-%	\end{subfigure}%
-%	\mycaption{3 nm \cz cluster: additional heat-treatment}{}
-%	\label{f:heatspike}
-%\end{figure}
 
 \begin{figure}[!h]
 	\begin{subfigure}{\textwidth} 	\centering
@@ -68,13 +50,9 @@ The simulation repositories can be accessed via the following Github links:
 	\end{subfigure}%
 	\vfill
 	\begin{subfigure}{\textwidth} 	\centering
-		\includegraphics[width=0.5\textwidth,trim={0 0.5cm 0 0.3cm},clip]{3nm/50-50/heat-spike100/post/comp_3nm.png} \subcaption{}
+		\includegraphics[width=0.48\textwidth,trim={0 0.5cm 0 0.3cm},clip]{3nm/50-50/heat-spike100/post/comp_3nm.png} \subcaption{}
 	\end{subfigure}%
-%	\vfill
-%	\begin{subfigure}{\textwidth} 	\centering
-%		\includegraphics[width=0.8\textwidth]{3nm/50-50/heat-spike100/post/comp-zr_3nm.png}
-%	\end{subfigure}%
-	\mycaption{Additional Heat-treatment to the 3 nm \cz Cluster}{(a) Fluctuations in core Cu at. \% during additional heat-treatment. (b) Final cluster radial composition profile. \Gls{igc} clusters simulations can help establish equilibrium profile.}
+	\mycaption{Additional heat-treatment to the 3 nm \cz Cluster}{(a) Fluctuations in core Cu at. \% during additional heat-treatment. (b) Final cluster radial composition profile. \Gls{igc} clusters simulations can help establish equilibrium profile.}
 	\label{f:heatspike-100}
 \end{figure}
 
@@ -129,7 +107,7 @@ The simulation repositories can be accessed via the following Github links:
 		\subcaption{Local shear strain}
 		\label{fig:cibd_single_strain3}
 	\end{subfigure}%
-	\mycaption{Local Strain in Single 3 nm Cluster Depositions}{Single cluster depositions at various impact energies are depicted 2ns after deposition. (a) The deposited clusters and color-coded by the core-shell structure determined in Figure~\ref{f:clus_rad-3nm}. (b) The same cluster atoms in (a) are colored by their local von-Mises shear strain. The intensity of distortion, and the volume of distortion are seen to increase with deposition energy.}
+	\mycaption{Local strain in Single 3 nm cluster depositions}{Single cluster depositions at various impact energies are depicted 2 ns after deposition. (a) The deposited clusters and color-coded by the core-shell structure determined in Figure~\ref{f:clus_rad-3nm}. (b) The same cluster atoms in (a) are colored by their local von-Mises shear strain. The intensity of distortion, and the volume of distortion are seen to increase with deposition energy.}
 	\label{f:clus_single-strain3}
 	%	\hfill
 \end{figure}
@@ -137,14 +115,14 @@ The simulation repositories can be accessed via the following Github links:
 \begin{figure}[!h]
 	\begin{subfigure}{0.5\textwidth}
 		\includegraphics[width=\linewidth]{3nm/post/clus_asph}
-		\subcaption{3 nm cluster depositions}
+		\subcaption{3 nm cluster deposition}
 	\end{subfigure}%
 	\hfill
 	\begin{subfigure}{0.5\textwidth}
 		\includegraphics[width=\linewidth]{7nm/post2/clus_asph}
-		\subcaption{7 nm}
+		\subcaption{7 nm nanoparticle deposition}
 	\end{subfigure}%
-	\mycaption{Cluster Asphericity Time-evolution vs Cluster-size}{Singly deposited clusters are studied for two different particle sizes by the cluster asphericity (see Section~\ref{s:camgdev} for more details). The as-deposited states of (a) the 3 nm clusters (same as Figure~\ref{f:cibdsasph}) and (b) the 7 nm nanoparticle, 2 ns after deposition.}
+	\mycaption{Cluster asphericity time-evolution vs cluster-size}{Singly deposited clusters are studied for two different particle sizes by the cluster asphericity (see Section~\ref{s:camgdev} for more details). The as-deposited states of (a) the 3 nm clusters (same as Figure~\ref{f:cibdsasph}) and (b) the 7 nm nanoparticle, 2 ns after deposition.}
 	\label{f:cibds_eval}
 \end{figure}
 
@@ -172,12 +150,12 @@ For the simulated \gls{rq} \gls{mg} and \gls{ng}, the sample volume is the same 
 \section{Voronoi Index Histograms for Cu-/Zr-centered in 3 nm CAMGs}
 \begin{figure}[!h]
 	\centering
-	\begin{subfigure}{0.49\linewidth} \centering \includegraphics[width=\textwidth]{1e10/voronoi_3nm_Cu50Zr50_CAMG_vs_MG_1e10_asp_Cu} 
+	\begin{subfigure}{0.47\linewidth} \centering \includegraphics[width=\textwidth]{1e10/voronoi_3nm_Cu50Zr50_CAMG_vs_MG_1e10_asp_Cu} 
 		\subcaption{} \end{subfigure}%
 	\hfill
-	\begin{subfigure}{0.49\linewidth} \centering \includegraphics[width=\textwidth]{1e10/voronoi_3nm_Cu50Zr50_CAMG_vs_MG_1e10_asp_Zr}
+	\begin{subfigure}{0.47\linewidth} \centering \includegraphics[width=\textwidth]{1e10/voronoi_3nm_Cu50Zr50_CAMG_vs_MG_1e10_asp_Zr}
 		\subcaption{} \end{subfigure}
-	\mycaption{Voronoi Polyhedra of 3 nm CAMGs for Cu- and Zr-centered atoms}{The Voronoi histograms are represented separately by species. (a) The Cu-centered atoms exhibit higher \gls{fi}-order (\vi{0}{0}{12}{0}) than (b) the Zr-centered atoms. The \gls{ilo} (not pictured) follows the same trend.}
+	\mycaption{\acrlong{vp} of 3 nm CAMGs for Cu- and Zr-centered atoms}{The Voronoi histograms are represented separately by species. (a) The Cu-centered atoms exhibit higher \gls{fi}-order (\vi{0}{0}{12}{0}) than (b) the Zr-centered atoms. The \gls{ilo} (not pictured) follows the same trend.}
 	\label{f:voro_cu-zr}
 \end{figure}
 
@@ -186,9 +164,34 @@ For the simulated \gls{rq} \gls{mg} and \gls{ng}, the sample volume is the same 
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=0.9\linewidth,trim={2.6cm 0 3.3cm 0},clip,angle=270]{camg_3nm/13.pdf}
-	\mycaption{Atomic Volume Distribution in the 3 nm CAMG Cores and Interfaces}{The effects of chemical segregation in CAMGs and NGs are easily observable as Cu peak height decreases in core and increases in interfaces. The shape of the distributions of CAMGs are similar to other glasses. Also similar to reports on NGs \cite{Cheng2019}. The distributions are similar also for core and interfaces.}
+	\mycaption{Atomic volume distribution in the 3 nm CAMG cores and interfaces}{The effects of chemical segregation in CAMGs and NGs are easily observable as Cu peak height decreases in core and increases in interfaces. The shape of the distributions of CAMGs are similar to other glasses. Also similar to reports on NGs \cite{Cheng2019}. The distributions are similar also for core and interfaces.}
 	\label{f:atvol}
 \end{figure}
+
+\clearpage
+\section{CAMG P.E./Atom Distribution in Cores and Interfaces}
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=1\linewidth,trim={2.2cm 0 3.0cm 0},clip,angle=270]{camg_3nm/14.pdf}
+	\mycaption{P.E/atom distribution in the 3 nm CAMG}{Atomic potential energy distributions of CAMGs are similar in shape for core and interfaces, also compared to NGs, RQ MG, and MG\_ht.}
+	\label{f:atpe}
+\end{figure}
+
+%\begin{figure}[!h]
+%	\begin{subfigure}{\textwidth} 	\centering
+%	\includegraphics[width=0.5\textwidth]{3nm/50-50/heat-spike/post/comp_3nm.png}
+%	\end{subfigure}%
+%	\vfill
+%	\begin{subfigure}{0.5\textwidth} 	\centering
+%	\includegraphics[width=\textwidth]{3nm/50-50/heat-spike/post/comp-cu_3nm.png}
+%	\end{subfigure}%
+%	\hfill
+%	\begin{subfigure}{0.5\textwidth} 	\centering
+%	\includegraphics[width=\textwidth]{3nm/50-50/heat-spike/post/comp-zr_3nm.png}
+%	\end{subfigure}%
+%	\mycaption{3 nm \cz cluster: additional heat-treatment}{}
+%	\label{f:heatspike}
+%\end{figure}
 
 %\begin{sidewaysfigure}[!h]
 %	\centering
@@ -197,12 +200,3 @@ For the simulated \gls{rq} \gls{mg} and \gls{ng}, the sample volume is the same 
 %	\label{f:atvol}
 %\end{sidewaysfigure}
 %Similar to those reported in \cite{Cheng2019}. Distributions are similar in shape for core and interfaces, and add up to similar behavior for the representative slab. The effects of chemical segregation are easily observable as Cu peak height decreases in core and increases in interfaces (See Fig \ref{fig:vol_core} and \ref{fig:vol_shell}), indicating yet again that the two regions exist with different local compositions.
-
-\clearpage
-\section{CAMG P.E./Atom Distribution in Cores and Interfaces}
-\begin{figure}[!h]
-	\centering
-	\includegraphics[width=1\linewidth,trim={2.2cm 0 3.0cm 0},clip,angle=270]{camg_3nm/14.pdf}
-	\mycaption{P.E/atom Distribution in the 3 nm CAMG}{Atomic potential energy distributions of CAMGs are similar in shape for core and interfaces, also compared to NGs, RQ MG, and MG\_ht.}
-	\label{f:atpe}
-\end{figure}

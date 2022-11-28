@@ -32,3 +32,6 @@ do
     echo "\n"ewacronym{$col1}{$col2}{$col3} >> $glostex;
     echo "\n"ewacronym{$col1}{$col2}{$col3};
 done < $acro
+
+echo "\n"ewacronym[longplural={Metallic Glasses}]{mg}{MG}{Metallic Glass} >> $glostex;
+echo "\n"ewacronym[longplural={Cluster-assembled Metallic Glasses}]{camg}{CAMG}{Clusterassembled Metallic Glass} >> $glostex;

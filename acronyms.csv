@@ -1,67 +1,65 @@
 3d,3D,three-dimensional
-pas,PAS,positron annihilation spectroscopy
+pas,PAS,Positron Annihilation Spectroscopy
 ihp,IHP,Inverse Hall-Petch
-abc,ABC,Autonomous basin climbing
-art,ART,activation-relaxation technique
+abc,ABC,Autonomous Basin Climbing
+art,ART,Activation-relaxation Technique
 mc,MC,Monte Carlo
 2d,2D,two-dimensional
-icb,ICB,ionized cluster beam 
-qna,QNA,quasi-nearest atom
-tem,TEM,transmission electron microscopy
-camg,CAMG,cluster-assembled metallic glass
-cam,CAMs,cluster-assembled materials
-cbmg,CBMG,cluster-based metallic glasses
-ng,NG,nanoglass
-mg,MG,metallic glass
-gfa,GFA,glass-forming ability
-rdf,RDF,radial distribution function
-prdf,PRDF,partial radial distribution function
-cibd,CIBD,cluster-ion beam deposition
-ilo,ILO,icosahedral-like order
-ilike,ICO-like,icosahedral-like
-fi,FI,full-icosahedral
-hcp,HCP,hexagonal close-packed
-eam,EAM,embedded atom model
-md,MD,molecular dynamics
-igc,IGC,inert-gas condensation
-exafs,EXAFS,extended X-ray absorption fine structure
-xanes,XANES,X-ray absorption near edge structure
-sro,SRO,short-range order
-mro,MRO,medium-range order
-pel,PEL,potential-energy landscape
-uhv,UHV,ultra-high vacuum
-pvd,PVD,physical-vapor deposition
-mght,MG\_ht,heat-treated metallic glass
+icb,ICB,Ionized Cluster Beam 
+qna,QNA,Quasi-nearest Atom
+tem,TEM,Transmission Electron Eicroscopy
+cam,CAMs,Cluster-assembled Materials
+cbmg,CBMG,Cluster-based Metallic Glasses
+ng,NG,Nanoglass
+gfa,GFA,Glass-forming Ability
+rdf,RDF,Radial Distribution Function
+prdf,PRDF,Partial Radial Distribution Function
+cibd,CIBD,Cluster-ion Beam Deposition
+ilo,ILO,Icosahedral-like Order
+ilike,ICO-like,Icosahedral-like
+fi,FI,Full-icosahedral
+hcp,HCP,Hexagonal Close-packed
+eam,EAM,Embedded Atom Model
+md,MD,Molecular Dynamics
+igc,IGC,Inert-gas Condensation
+exafs,EXAFS,Extended X-ray Absorption Fine Structure
+xanes,XANES,X-ray Absorption Near Edge Structure
+sro,SRO,Short-range Order
+mro,MRO,Medium-range Order
+pel,PEL,Potential-energy Landscape
+uhv,UHV,Ultra-high Vacuum
+pvd,PVD,Physical-vapor Deposition
+mght,MG\_ht,Heat-treated Metallic Glass
 int,INT,Institute of Nanotechnology
 kit,KIT,Karlsruhe Institute of Technology
-lmp,LAMMPS,large-scale atomic/molecular massively parallel simulator
-rq,RQ,rapidly-quenched
-pbc,PBC,periodic boundary conditions
-ovito,OVITO,open visualization tool
-dft,DFT,density functional theory
+lmp,LAMMPS,Large-scale Atomic/molecular Massively Parallel Simulator
+rq,RQ,Rapidly-quenched
+pbc,PBC,Periodic Boundary Conditions
+ovito,OVITO,Open Visualization Tool
+dft,DFT,Density Functional Theory
 lj,LJ,Lennard-Jones
-hpc,HPC,high-performance computing
-mpi,MPI,message passing interface
-pe,P.E.,potential energy
-sc,SC,simple cubic
-vp,VP,Voronoi polyhedra
+hpc,HPC,High-performance Computing
+mpi,MPI,Message Passing Interface
+pe,PE,potential energy
+sc,SC,Simple Cubic
+vp,VP,Voronoi Polyhedra
 fh2,ForHLR II,Forschungshochleistungs-rechners 
 hrk,HoreKa,Hochleistungsrechner Karlsruhe
-lro,LRO,long-range order
+lro,LRO,Long-range Order
 bmg,BMG,bulk metallic glasses
-fcc,FCC,face-centered cubic
-ecp,ECP,efficient cluster packing
-ncm,NCM,nanocrystalline materials
-xrd,XRD,X-ray diffraction
-qs,QS,quadrupole splitting
-ms,MS,M\"ossbauer spectroscopy
-stz,STZ,shear transformation zones
-apt,APT,atom-probe tomography
-tof,TOF-MS,time of flight mass spectrometry
-rmc,RMC,reverse monte carlo
-gum,GUM,geometrically-unfavored motifs
-zfc,ZFC,zero-field cooled
-fc,FC,field cooled
-edx,EDX,energy-dispersive X-ray spectroscopy
+fcc,FCC,Face-centered Cubic
+ecp,ECP,Efficient Cluster Packing
+ncm,NCM,Nanocrystalline Materials
+xrd,XRD,X-ray Diffraction
+qs,QS,Quadrupole Splitting
+ms,MS,M\"ossbauer Spectroscopy
+stz,STZ,Shear Transformation Zones
+apt,APT,Atom-probe Tomography
+tof,TOF-MS,Time-of-flight Mass Spectrometry
+rmc,RMC,Reverse Monte Carlo
+gum,GUM,Geometrically-unfavored Motifs
+zfc,ZFC,Zero-field Cooled
+fc,FC,Field Cooled
+edx,EDX,Energy-dispersive X-ray Spectroscopy
 xas,XAS,X-ray absorption spectroscopy
 bm,BM,ball-milling

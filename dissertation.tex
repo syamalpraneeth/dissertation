@@ -71,7 +71,7 @@ headline=false %swtich off automark in the header, automark in footer is enabled
 %%%%%%%%%%%%%%%%%%
 %Bibliography
 %%%%%%%%%%%%%%%%%%
-\usepackage[maxcitenames=2,uniquelist=false,backref=true,backend=biber,style=chem-angew,sorting=none]{biblatex} %Bibliography
+\usepackage[maxcitenames=2,uniquelist=false,backref=true,backend=biber,style=chem-angew,sorting=none,hyperref=true]{biblatex} %Bibliography
 %\usepackage[sort,nocompress]{cite}
 \bibliography{library}
 
@@ -171,6 +171,7 @@ headline=false %swtich off automark in the header, automark in footer is enabled
 \newcommand{\s}[2]{{#1}$_{#2}$\xspace}
 \newcommand{\qr}[1]{\mbox{$10^{{#1}}$ K/s}\xspace}
 \newcommand{\On}[1]{\mbox{$\mathcal{O}({#1})$}\xspace}
+\newcommand{\tex}[1]{\LaTeX\xspace}
 
 \newcommand\mycaption[2]{\caption[#1]{\textbf{#1}: #2}}
 %
@@ -222,11 +223,14 @@ headline=false %swtich off automark in the header, automark in footer is enabled
 
 \loadglsentries{glossary}
 \makeglossaries
-%
+
 \begin{document}
 \include{chapters/title.tex}
 \include{chapters/abstract.tex}
 \include{chapters/tocstuff.tex} %todo list, toc, list of figs and tables, glossary
+
+%\todototoc
+%\listoftodos
 
 \setcounter{chapter}{0}
 \mainmatter
@@ -234,7 +238,6 @@ headline=false %swtich off automark in the header, automark in footer is enabled
 \include{chapters/introduction.tex}
 \glsresetall
 \include{chapters/background.tex}
-\glsresetall %\include{chapters/changebar-marks.tex} %changebar testing
 \include{chapters/methods.tex}
 \glsresetall
 \include{chapters/development.tex}
@@ -251,6 +254,5 @@ headline=false %swtich off automark in the header, automark in footer is enabled
 \include{chapters/supplementary.tex}
 \include{chapters/cv.tex}
 
-\addcontentsline{toc}{chapter}{Acknowledgements} \todo{Add the Acknowledgements chapter}
-%\include{chapters/ack.tex}
+\include{chapters/ack.tex}
 \end{document}
